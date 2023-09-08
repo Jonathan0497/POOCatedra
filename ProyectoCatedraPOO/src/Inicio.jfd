@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -24,6 +24,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "btn_categoria"
 							"text": "categorias"
+							"preferredSize": new java.awt.Dimension( 125, 19 )
 						} )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "btn_formato"

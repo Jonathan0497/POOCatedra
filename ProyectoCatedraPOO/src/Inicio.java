@@ -1,3 +1,4 @@
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 /*
@@ -48,6 +49,7 @@ public class Inicio extends JFrame {
 
                     //---- btn_categoria ----
                     btn_categoria.setText("categorias");
+                    btn_categoria.setPreferredSize(new Dimension(125, 19));
                     btn_cinematografia.add(btn_categoria);
 
                     //---- btn_formato ----
