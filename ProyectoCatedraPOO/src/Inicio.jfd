@@ -4,16 +4,51 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:683:x}"
-			"$verticalGroup": "par l {space :0:510:x}"
+			"$horizontalGroup": "par l {space :0:573:x}"
+			"$verticalGroup": "par l {space :0:501:x}"
 		} ) {
 			name: "this"
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_inicio"
+					"text": "Inicio"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/casa.png" )
+				} )
+				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+					name: "menuBar2"
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "btn_cinematografia"
+						"text": "Cinematografia"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/camara-de-video.png" )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "btn_categoria"
+							"text": "categorias"
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "btn_formato"
+							"text": "formato"
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "btn_peliculas"
+							"text": "peliculas"
+						} )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_usuario"
+						"text": "Usuario"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/editar.png" )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_miUsuario"
+					"text": "Mi Usuario"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/usuario_1.png" )
+				} )
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 685, 565 )
+			"size": new java.awt.Dimension( 575, 555 )
 		} )
 	}
 }
