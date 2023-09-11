@@ -1,0 +1,57 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {space :0:653:x}"
+			"$verticalGroup": "par l {space :0:572:x}"
+		} ) {
+			name: "this"
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "Cinematografía"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/camara-de-video.png" )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_genero"
+						"text": "Genero"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_formato"
+						"text": "Formato"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_peliculas"
+						"text": "Peliculas"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_funciones"
+						"text": "Funciones"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_clasificacion"
+						"text": "Clasificación"
+					} )
+				} )
+				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+					name: "hSpacer1"
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_Usuario"
+					"text": "Usuarios"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/editar.png" )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_miUsuario"
+					"text": "Mi Usuario"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/usuario_1.png" )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}

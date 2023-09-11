@@ -7,100 +7,63 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 
-public class Mantenimiento_EstadoPelicula {
-    /**
-     * @return the cn
-     */
+public class Mantenimiento_Clasificacion {
     public Connection getCn() {
         return cn;
     }
 
-    /**
-     * @param cn the cn to set
-     */
     public void setCn(Connection cn) {
         this.cn = cn;
     }
 
-    /**
-     * @return the codigo
-     */
     public Integer getCodigo() {
         return codigo;
     }
 
-    /**
-     * @param codigo the codigo to set
-     */
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the rs
-     */
     public ResultSet getRs() {
         return rs;
     }
 
-    /**
-     * @param rs the rs to set
-     */
     public void setRs(ResultSet rs) {
         this.rs = rs;
     }
 
-    /**
-     * @return the ps
-     */
     public PreparedStatement getPs() {
         return ps;
     }
 
-    /**
-     * @param ps the ps to set
-     */
     public void setPs(PreparedStatement ps) {
         this.ps = ps;
     }
 
-    /**
-     * @return the rsm
-     */
     public ResultSetMetaData getRsm() {
         return rsm;
     }
 
-    /**
-     * @param rsm the rsm to set
-     */
     public void setRsm(ResultSetMetaData rsm) {
         this.rsm = rsm;
     }
 
-    /**
-     * @return the dtm
-     */
     public DefaultTableModel getDtm() {
         return dtm;
     }
+
     public void setDtm(DefaultTableModel dtm) {
         this.dtm = dtm;
     }
+
     private Connection cn;
     private Integer codigo;
     private String nombre;
@@ -109,15 +72,14 @@ public class Mantenimiento_EstadoPelicula {
     private ResultSetMetaData rsm;
     private DefaultTableModel dtm;
 
-    public Mantenimiento_EstadoPelicula() {
+    public Mantenimiento_Clasificacion() {
         Conexion con = new Conexion();
         cn = con.conectar();
     }
-
     public int obtenerUltimoID() {
         int ultimoID = -1;
         try {
-            String sql = "SELECT MAX(id_estadoPelicula) FROM estado_pelicula";
+            String sql = "SELECT MAX(id_clasificacion) FROM clasificacion";
             PreparedStatement cmd = cn.prepareStatement(sql);
             ResultSet rs = cmd.executeQuery();
 
@@ -138,8 +100,8 @@ public class Mantenimiento_EstadoPelicula {
         try{
             int newID = obtenerUltimoID() + 1;
 
-            String sql = "INSERT INTO estado_pelicula (id_estadoPelicula, estadoPelicula)"
-                        + "VALUES(?, ?)";
+            String sql = "INSERT INTO clasificacion (id_clasificacion, clasificacion)"
+                    + "VALUES(?, ?)";
 
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
@@ -161,7 +123,7 @@ public class Mantenimiento_EstadoPelicula {
     public boolean modificarProyecto(){
         boolean resp = false;
         try {
-            String sql = "UPDATE estado_pelicula SET estadoPelicula = ? WHERE id_estadoPelicula = ?;";
+            String sql = "UPDATE clasificacion SET clasificacion = ? WHERE id_clasificacion = ?;";
             PreparedStatement cmd = cn.prepareStatement(sql);
 
             cmd.setString(1, nombre);
@@ -182,7 +144,7 @@ public class Mantenimiento_EstadoPelicula {
     public boolean eliminarProyecto(){
         boolean resp = false;
         try{
-            String sql = "DELETE FROM estado_pelicula WHERE id_estadoPelicula = ?;";
+            String sql = "DELETE FROM clasificacion WHERE id_clasificacion = ?;";
             PreparedStatement cmd = cn.prepareStatement (sql);
 
             cmd.setInt(1, codigo);
@@ -199,12 +161,11 @@ public class Mantenimiento_EstadoPelicula {
         return resp;
     }
 
-
-    public void llenartabla(javax.swing.JTable tabla) throws Exception {
+    public void ShowTable(javax.swing.JTable tabla) throws Exception {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT * FROM estado_pelicula");
+            ps = cn.prepareStatement("SELECT * FROM clasificacion");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();
@@ -234,4 +195,5 @@ public class Mantenimiento_EstadoPelicula {
             }
         }
     }
+
 }
