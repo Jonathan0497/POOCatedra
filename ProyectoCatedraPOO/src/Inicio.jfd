@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:573:x}"
-			"$verticalGroup": "par l {space :0:501:x}"
+			"$horizontalGroup": "par l {space :0:583:x}"
+			"$verticalGroup": "par l {space :0:516:x}"
 		} ) {
 			name: "this"
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
@@ -23,16 +23,25 @@ new FormModel {
 						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/camara-de-video.png" )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "btn_categoria"
+<<<<<<< Updated upstream
 							"text": "categorias"
 							"preferredSize": new java.awt.Dimension( 125, 19 )
+=======
+							"text": "Categorias"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_categoria", true ) )
+>>>>>>> Stashed changes
 						} )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "btn_formato"
-							"text": "formato"
+							"text": "Formato"
 						} )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "btn_peliculas"
-							"text": "peliculas"
+							"text": "Peliculas"
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "btn_funcion"
+							"text": "Función"
 						} )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
@@ -49,7 +58,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 575, 555 )
+			"size": new java.awt.Dimension( 585, 570 )
 		} )
 	}
 }
