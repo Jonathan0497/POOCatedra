@@ -1,8 +1,8 @@
-<<<<<<< Updated upstream
+
 import java.awt.*;
-=======
+
 import java.awt.event.*;
->>>>>>> Stashed changes
+
 import javax.swing.*;
 import javax.swing.GroupLayout;
 /*
@@ -66,13 +66,13 @@ public class Inicio extends JFrame {
                     btn_cinematografia.setIcon(new ImageIcon(getClass().getResource("/icon/camara-de-video.png")));
 
                     //---- btn_categoria ----
-<<<<<<< Updated upstream
+
                     btn_categoria.setText("categorias");
                     btn_categoria.setPreferredSize(new Dimension(125, 19));
-=======
+
                     btn_categoria.setText("Categorias");
                     btn_categoria.addActionListener(e -> btn_categoria(e));
->>>>>>> Stashed changes
+
                     btn_cinematografia.add(btn_categoria);
 
                     //---- btn_formato ----
