@@ -1,22 +1,15 @@
-import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.GroupLayout;
-import Clases.Conexion;
 import Clases.Mantenimiento_EstadoPelicula;
-import java.io.File;
-import java.sql.Connection;
+import Clases.Mantenimiento_TipoUsuario;
+
+import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
 /*
- * Created by JFormDesigner on Wed Sep 06 20:37:02 CST 2023
+ * Created by JFormDesigner on Tue Sep 12 14:25:23 CST 2023
  */
 
 
@@ -24,11 +17,13 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author jonat
  */
-public class EstadoPelicula extends JFrame {
+public class TipoUsuarioForm extends JDialog {
+
     Clases.Conexion cn = new Clases.Conexion();
     DefaultTableModel modelo = new DefaultTableModel();
-    Mantenimiento_EstadoPelicula ver = new Mantenimiento_EstadoPelicula();
-    public EstadoPelicula() {
+    Mantenimiento_TipoUsuario ver = new Mantenimiento_TipoUsuario();
+    public TipoUsuarioForm(Window owner) {
+        super(owner);
         initComponents();
 
         modelo.addColumn("id_estado");
@@ -52,13 +47,13 @@ public class EstadoPelicula extends JFrame {
     }
 
     private void btn_guardarMouseClicked(MouseEvent e) {
-        if (txt_estado.getText().isEmpty()) {
+        if (txt_rango.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Campos vacíos");
             return;
         }
 
-        Clases.Mantenimiento_EstadoPelicula obj = new Clases.Mantenimiento_EstadoPelicula();
-        obj.setNombre(txt_estado.getText());
+        Clases.Mantenimiento_TipoUsuario obj = new Clases.Mantenimiento_TipoUsuario();
+        obj.setNombre(txt_rango.getText());
 
         try {
             if (obj.guardarProyecto()) {
@@ -76,8 +71,8 @@ public class EstadoPelicula extends JFrame {
     }
 
     private void btn_eliminarMouseClicked(MouseEvent e) {
-        Clases.Mantenimiento_EstadoPelicula obj = new Clases.Mantenimiento_EstadoPelicula();
-        obj.setCodigo(Integer.parseInt(txt_id.getText()));
+        Clases.Mantenimiento_TipoUsuario obj = new Clases.Mantenimiento_TipoUsuario();
+        obj.setCodigo(Integer.parseInt(txt_idRango.getText()));
         int eliminar = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar?", "Atención", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(eliminar == 0){
@@ -98,36 +93,16 @@ public class EstadoPelicula extends JFrame {
         }
     }
 
-    private void tablaMouseClicked(MouseEvent e) {
-        try {
-            int row = tabla.getSelectedRow();
-            String Table_click = (tabla.getModel().getValueAt(row, 0).toString());
-            String sql = "SELECT * FROM estado_pelicula WHERE id_estadoPelicula='" + Table_click + "' ";
-            PreparedStatement ps = cn.conectar().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String add1 = rs.getString("id_estadoPelicula");
-                txt_id.setText(add1);
-                String add2 = rs.getString("estadoPelicula");
-                txt_estado.setText(add2);
-
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
     private void btn_modificarMouseClicked(MouseEvent e) {
-        if (txt_id.getText().equals("") ||
-                txt_estado.getText().equals("")){
+        if (txt_idRango.getText().equals("") ||
+                txt_rango.getText().equals("")){
 
             JOptionPane.showMessageDialog(this, "Campos vacíos");
         }
         else{
             Clases.Mantenimiento_EstadoPelicula obj = new Clases.Mantenimiento_EstadoPelicula();
-            obj.setCodigo(Integer.parseInt(txt_id.getText()));
-            obj.setNombre(txt_estado.getText());
+            obj.setCodigo(Integer.parseInt(txt_idRango.getText()));
+            obj.setNombre(txt_rango.getText());
 
             if(obj.modificarProyecto()){
                 try {
@@ -147,14 +122,34 @@ public class EstadoPelicula extends JFrame {
         }
     }
 
+    private void tablaMouseClicked(MouseEvent e) {
+        try {
+            int row = tabla.getSelectedRow();
+            String Table_click = (tabla.getModel().getValueAt(row, 0).toString());
+            String sql = "SELECT * FROM tipo_usuario WHERE id_tipoUsuario='" + Table_click + "' ";
+            PreparedStatement ps = cn.conectar().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String add1 = rs.getString("id_tipoUsuario");
+                txt_idRango.setText(add1);
+                String add2 = rs.getString("tipoUsuario");
+                txt_rango.setText(add2);
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
+        label3 = new JLabel();
         label1 = new JLabel();
         label2 = new JLabel();
-        txt_id = new JTextField();
-        txt_estado = new JTextField();
-        label3 = new JLabel();
+        txt_idRango = new JTextField();
+        txt_rango = new JTextField();
         scrollPane1 = new JScrollPane();
         tabla = new JTable();
         btn_guardar = new JButton();
@@ -164,15 +159,15 @@ public class EstadoPelicula extends JFrame {
         //======== this ========
         var contentPane = getContentPane();
 
+        //---- label3 ----
+        label3.setText("Rango Usuario");
+        label3.setFont(new Font("Inter", Font.PLAIN, 26));
+
         //---- label1 ----
-        label1.setText("ID Estado");
+        label1.setText("ID Rango");
 
         //---- label2 ----
-        label2.setText("Estado");
-
-        //---- label3 ----
-        label3.setText("Estado Pelicula");
-        label3.setFont(new Font("Inter", Font.PLAIN, 26));
+        label2.setText("Rango");
 
         //======== scrollPane1 ========
         {
@@ -188,7 +183,7 @@ public class EstadoPelicula extends JFrame {
         }
 
         //---- btn_guardar ----
-        btn_guardar.setText("Guardar");
+        btn_guardar.setText("Agregar");
         btn_guardar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -201,7 +196,6 @@ public class EstadoPelicula extends JFrame {
         btn_eliminar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                btn_eliminarMouseClicked(e);
                 btn_eliminarMouseClicked(e);
             }
         });
@@ -220,74 +214,65 @@ public class EstadoPelicula extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(230, 230, 230)
+                            .addGap(68, 68, 68)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(214, 214, 214)
                             .addComponent(label3))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(167, 167, 167)
+                            .addGap(153, 153, 153)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(label1)
-                                .addComponent(label2))
-                            .addGap(76, 76, 76)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(txt_estado, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_id)))
+                                .addComponent(label2)
+                                .addComponent(label1))
+                            .addGap(54, 54, 54)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txt_idRango, GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_rango, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(159, 159, 159)
-                            .addComponent(btn_guardar, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_eliminar, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
+                            .addGap(139, 139, 139)
+                            .addComponent(btn_guardar)
+                            .addGap(42, 42, 42)
+                            .addComponent(btn_eliminar)
+                            .addGap(42, 42, 42)
                             .addComponent(btn_modificar)))
-                    .addContainerGap(182, Short.MAX_VALUE))
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(0, 34, Short.MAX_VALUE)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 587, GroupLayout.PREFERRED_SIZE)
-                    .addGap(32, 32, 32))
+                    .addContainerGap(83, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(29, 29, 29)
+                    .addGap(25, 25, 25)
                     .addComponent(label3)
-                    .addGap(58, 58, 58)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(label1)
-                        .addComponent(txt_id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(38, 38, 38)
+                        .addComponent(txt_idRango, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(48, 48, 48)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(label2)
-                        .addComponent(txt_estado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_rango, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_eliminar)
                         .addComponent(btn_guardar)
+                        .addComponent(btn_eliminar)
                         .addComponent(btn_modificar))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20))
+                    .addGap(30, 30, 30)
+                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+                    .addGap(25, 25, 25))
         );
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EstadoPelicula().setVisible(true);
-            }
-        });
-    }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
+    private JLabel label3;
     private JLabel label1;
     private JLabel label2;
-    private JTextField txt_id;
-    private JTextField txt_estado;
-    private JLabel label3;
+    private JTextField txt_idRango;
+    private JTextField txt_rango;
     private JScrollPane scrollPane1;
     private JTable tabla;
     private JButton btn_guardar;
