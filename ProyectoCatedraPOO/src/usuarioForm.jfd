@@ -4,13 +4,85 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:653:x}"
-			"$verticalGroup": "par l {space :0:579:x}"
+			"$horizontalGroup": "par l {seq l {par l {seq {space :p:209:p, comp label3:::p::p}, seq l {space :p:22:p, par l {seq l {par l {comp label1::l:p::p, comp label2::l:p::p, comp label4::l:p::p, comp label8::l:p::p}, space :p:36:p, par l {seq {par t:::p {comp textField6::l::179:x, comp txt_nombre::l:::x, comp txt_id::l:::x, comp txt_apellido::l::179:x}, space :p:23:p, par l {comp label6::l:p::p, comp label7::l:p::p, comp label5::l:p::p}, space :p:26:p, par l:::p {comp txt_telefono:::::x, comp cmb_tipo::l:::x, comp txt_dui::l:p:179:p}}, seq {comp button1:::p::p, space :p:79:p, comp button2:::p::p, space :p:68:p, comp button3:::p::p}}}, comp scrollPane1::l:p:609:p}}}, space ::22:x}}"
+			"$verticalGroup": "par l {seq l {space :p:15:p, comp label3:::p::p, space :p:46:p, par b {comp label1::b:p::p, comp label6::b:p::p, comp txt_id::b:p::p, comp txt_telefono::b:p::p}, space s:::p, par b {comp label2::b:p::p, comp label7::b:p::p, comp txt_nombre::b:p::p, comp cmb_tipo::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp txt_apellido::b:p::p, comp label5::b:p::p, comp txt_dui::b:p::p}, space s:::p, par b {comp label8::b:p::p, comp textField6::b:p::p}, space s:::p, par b {comp button1::b:p::p, comp button3::b:p::p, comp button2::b:p::p}, space :p:33:p, comp scrollPane1:::p:228:p, space ::16:x}}"
 		} ) {
 			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Registro Usuarios"
+				"font": new java.awt.Font( "Inter", 0, 26 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "ID Usuario:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Nombre:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Apellido:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "DUI:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "Telefono:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "Rango Usuario:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_id"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_nombre"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_apellido"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_dui"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_telefono"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_tipo"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Agregar"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Eliminar"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": "Modificar"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "Contraseña"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField6"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+				} )
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 10 )
-			"size": new java.awt.Dimension( 655, 610 )
+			"size": new java.awt.Dimension( 655, 625 )
 		} )
 	}
 }
