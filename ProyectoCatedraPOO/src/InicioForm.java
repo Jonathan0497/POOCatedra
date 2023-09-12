@@ -14,6 +14,13 @@ public class InicioForm extends JFrame {
         initComponents();
     }
 
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Inicio().setVisible(true);
+            }
+        });
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza

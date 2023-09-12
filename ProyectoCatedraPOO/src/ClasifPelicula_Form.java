@@ -280,3 +280,4 @@ public class ClasifPelicula_Form extends JDialog {
     private JTable tabla;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
+
