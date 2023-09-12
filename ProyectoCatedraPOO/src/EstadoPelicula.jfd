@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq l {space :p:230:p, comp label3:::p::p}, seq l {space :p:167:p, par l {comp label1::l:p::p, comp label2::l:p::p}, space :p:76:p, par l:::p {comp txt_id:::::x, comp txt_estado:::p:159:p}}, seq l {space :p:159:p, comp btn_guardar:::p:92:p, space s:::p, comp btn_eliminar:::p:92:p, space s:::p, comp btn_modificar:::p::p}}, space ::182:x}, seq t {space :0:34:x, comp scrollPane1:::p:587:p, space :p:32:p}}"
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:230:p, comp label3:::p::p}, seq l {space :p:167:p, par l {comp label1::l:p::p, comp label2::l:p::p}, space :p:76:p, par l {comp txt_estado:::p:159:p, comp txt_id:::::x}}, seq l {space :p:159:p, comp btn_guardar:::p:92:p, space s:::p, comp btn_eliminar:::p:92:p, space s:::p, comp btn_modificar:::p::p}}, space ::182:x}, seq t {space :0:34:x, comp scrollPane1:::p:587:p, space :p:32:p}}"
 			"$verticalGroup": "par l {seq l {space :p:29:p, comp label3:::p::p, space :p:58:p, par b {comp label1::b:p::p, comp txt_id::b:p::p}, space :p:38:p, par b {comp label2::b:p::p, comp txt_estado::b:p::p}, space s:::p, par b {comp btn_eliminar::b:p::p, comp btn_guardar::b:p::p, comp btn_modificar::b:p::p}, space ::26:x, comp scrollPane1:::p:282:p, space :p:20:p}}"
 		} ) {
 			name: "this"
@@ -55,4 +55,3 @@ new FormModel {
 		} )
 	}
 }
-
