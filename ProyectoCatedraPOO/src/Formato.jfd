@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:653:x};par l {seq {space :0:0:x, par l {seq {space :70:70:p, comp label1:::p::p, space :76:76:p, comp txt_idFormato:::p:159:p}, seq {space :71:71:p, comp label2:::p::p, space :92:92:p, comp txt_formato:::p:159:p}, seq {space :71:71:p, comp label4:::p::p, space :106:106:p, comp txt_precio:::p:159:p}, seq {space :56:56:p, comp btn_guardar:::p:92:p, space :18:18:p, comp btn_eliminar:::p:92:p, space :18:18:p, comp btn_modificar:::p::p}, comp scrollPane1:::p:452:p}, space :0:0:x}}"
-			"$verticalGroup": "par l {space :0:594:x};par l {seq {space :0:0:x, par l {seq {space :6:6:p, comp label1:::p::p}, comp txt_idFormato:::p::p}, space :12:12:p, par l {seq {space :6:6:p, comp label2:::p::p}, comp txt_formato:::p::p}, space :18:18:p, par l {seq {space :6:6:p, comp label4:::p::p}, comp txt_precio:::p::p}, space :12:12:p, par l {comp btn_guardar:::p::p, comp btn_eliminar:::p::p, comp btn_modificar:::p::p}, space :37:37:p, comp scrollPane1:::p:180:p, space :0:0:x}}"
+			"$horizontalGroup": "par l {seq {par l {seq {par l {seq {space :p:155:p, par t {comp label1:::p::p, comp label4:::p::p, comp label2::t:p::p}, space :p:43:p}, seq t {space :::p, comp btn_guardar:::p:92:p, space s:::p}}, par l {comp txt_formato:::p:159:p, seq {comp btn_eliminar:::p:92:p, space u:::p, comp btn_modificar:::p::p}, comp txt_precio:::p:159:p, comp txt_idFormato::l:p:159:p}}, seq l {space :p:90:p, comp scrollPane1:::p:452:p}}, space ::111:x}}"
+			"$verticalGroup": "par l {seq l {space :p:86:p, par l {comp txt_idFormato:::p::p, comp label1:::p::p}, space s:::p, par b {comp txt_formato::b:p::p, comp label2::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp txt_precio::b:p::p}, space :p:21:p, par b {comp btn_eliminar::b:p::p, comp btn_modificar::b:p::p, comp btn_guardar::b:p::p}, space :p:48:p, comp scrollPane1:::p:180:p, space ::103:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -34,6 +34,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_guardar"
 				"text": "Guardar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {

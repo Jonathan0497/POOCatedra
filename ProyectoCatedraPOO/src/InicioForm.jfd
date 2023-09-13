@@ -22,6 +22,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_formato"
 						"text": "Formato"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_formato", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_peliculas"

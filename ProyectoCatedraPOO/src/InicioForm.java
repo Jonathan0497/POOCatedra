@@ -36,6 +36,11 @@ public class InicioForm extends JFrame {
         CategoriaForm c = new CategoriaForm(this);
         c.setVisible(true);
     }
+
+    private void btn_formato(ActionEvent e) {
+        Formato c = new Formato(this);
+        c.setVisible(true);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
@@ -68,6 +73,7 @@ public class InicioForm extends JFrame {
 
                 //---- btn_formato ----
                 btn_formato.setText("Formato");
+                btn_formato.addActionListener(e -> btn_formato(e));
                 menu1.add(btn_formato);
 
                 //---- btn_peliculas ----
