@@ -163,19 +163,21 @@ public class Mantenimiento_Usuario {
         boolean resp = false;
         try{
             int newID = obtenerUltimoID() + 1;
+            int id_estado = 1;
 
-            String sql = "INSERT INTO usuario (id_usuario, nombre, apellido, dui, correo, telefono, id_estadoUsuario, id_tipoUsuario)"
-                    + "VALUES(?, ?, ? , ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuario (id_usuario, nombre, apellido, clave, dui, correo, telefono, id_estadoUsuario, id_tipoUsuario)"
+                    + "VALUES(?, ?, ? , ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
             cmd.setString(2, nombre);
             cmd.setString(3, apellido);
-            cmd.setString(4, dui);
-            cmd.setString(5, correo);
-            cmd.setInt(6, telefono);
-            cmd.setInt(7, estado);
-            cmd.setInt(8, tipo);
+            cmd.setString(4, contra);
+            cmd.setString(5, dui);
+            cmd.setString(6, correo);
+            cmd.setInt(7, telefono);
+            cmd.setInt(8, id_estado);
+            cmd.setInt(9, tipo);
 
             if(!cmd.execute()){
                 resp = true;
@@ -193,7 +195,7 @@ public class Mantenimiento_Usuario {
     public boolean modificarProyecto(){
         boolean resp = false;
         try {
-            String sql = "UPDATE usuario SET nombre = ?, apellido = ?, dui = ?, correo = ?, telefono = ?, id_estadoUsuario = ?, id_tipoUsuario = ? WHERE id_usuario = ?;";
+            String sql = "UPDATE usuario SET nombre = ?, apellido = ?, dui = ?, correo = ?, telefono = ?, id_tipoUsuario = ? WHERE id_usuario = ?;";
             PreparedStatement cmd = cn.prepareStatement(sql);
 
             cmd.setString(1, nombre);
@@ -201,9 +203,8 @@ public class Mantenimiento_Usuario {
             cmd.setString(3, dui);
             cmd.setString(4, correo);
             cmd.setInt(5, telefono);
-            cmd.setInt(6, estado);
-            cmd.setInt(7, tipo);
-            cmd.setInt(8, codigo);
+            cmd.setInt(6, tipo);
+            cmd.setInt(7, codigo);
 
             if(!cmd.execute()){
                 resp = true;
@@ -220,7 +221,7 @@ public class Mantenimiento_Usuario {
     public boolean eliminarProyecto(){
         boolean resp = false;
         try{
-            String sql = "DELETE FROM usuario WHERE id_usuario = ?;";
+            String sql = "UPDATE usuario SET id_estadoUsuario = 2 WHERE id_usuario = ?";
             PreparedStatement cmd = cn.prepareStatement (sql);
 
             cmd.setInt(1, codigo);
@@ -241,7 +242,7 @@ public class Mantenimiento_Usuario {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT * FROM usuario");
+            ps = cn.prepareStatement("SELECT u.id_usuario, u.nombre, u.apellido, u.correo, u.telefono, tu.tipoUsuario FROM usuario u INNER JOIN tipo_usuario tu ON u.id_tipoUsuario = tu.id_tipoUsuario;");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();

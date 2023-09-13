@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {par l {seq {space :p:209:p, comp label3:::p::p}, seq l {space :p:22:p, par l {seq l {par l {comp label1::l:p::p, comp label2::l:p::p, comp label4::l:p::p, comp label8::l:p::p}, space :p:36:p, par l {seq {par t:::p {comp textField6::l::179:x, comp txt_nombre::l:::x, comp txt_id::l:::x, comp txt_apellido::l::179:x}, space :p:23:p, par l {comp label6::l:p::p, comp label7::l:p::p, comp label5::l:p::p}, space :p:26:p, par l:::p {comp txt_telefono:::::x, comp cmb_tipo::l:::x, comp txt_dui::l:p:179:p}}, seq {comp button1:::p::p, space :p:79:p, comp button2:::p::p, space :p:68:p, comp button3:::p::p}}}, comp scrollPane1::l:p:609:p}}}, space ::22:x}}"
-			"$verticalGroup": "par l {seq l {space :p:15:p, comp label3:::p::p, space :p:46:p, par b {comp label1::b:p::p, comp label6::b:p::p, comp txt_id::b:p::p, comp txt_telefono::b:p::p}, space s:::p, par b {comp label2::b:p::p, comp label7::b:p::p, comp txt_nombre::b:p::p, comp cmb_tipo::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp txt_apellido::b:p::p, comp label5::b:p::p, comp txt_dui::b:p::p}, space s:::p, par b {comp label8::b:p::p, comp textField6::b:p::p}, space s:::p, par b {comp button1::b:p::p, comp button3::b:p::p, comp button2::b:p::p}, space :p:33:p, comp scrollPane1:::p:228:p, space ::16:x}}"
+			"$horizontalGroup": "par l {seq l {par l {seq {space :p:209:p, comp label3:::p::p}, seq l {space :p:22:p, par l {seq l {par l {comp label1::l:p::p, comp label2::l:p::p, comp label4::l:p::p, comp label8::l:p::p}, space :p:36:p, par l {seq {par t:::p {comp txt_clave::l::179:x, comp txt_nombre::l:::x, comp txt_id::l:::x, comp txt_apellido::l::179:x}, par l {seq l {space :p:23:p, par l {comp label6::l:p::p, comp label7::l:p::p, comp label5::l:p::p}}, seq l {space s:::p, comp label9:::p::p}}, space :p:26:p, par l:::p {comp txt_telefono:::::x, comp cmb_tipo::l:::x, comp txt_dui::l::179:x, comp txt_correo::::179:x}}, seq {comp btn_guardar:::p::p, space :p:79:p, comp btn_eliminar:::p::p, space :p:68:p, comp btn_modificar:::p::p}}}, comp scrollPane1::l:p:609:p}}}, space ::22:x}}"
+			"$verticalGroup": "par l {seq l {space :p:15:p, comp label3:::p::p, space :p:46:p, par b {comp label1::b:p::p, comp label6::b:p::p, comp txt_id::b:p::p, comp txt_telefono::b:p::p}, space s:::p, par b {comp label2::b:p::p, comp label7::b:p::p, comp txt_nombre::b:p::p, comp cmb_tipo::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp txt_apellido::b:p::p, comp label5::b:p::p, comp txt_dui::b:p::p}, space s:::p, par b {comp label8::b:p::p, comp txt_clave::b:p::p, comp label9::b:p::p, comp txt_correo::b:p::p}, space s:::p, par b {comp btn_guardar::b:p::p, comp btn_modificar::b:p::p, comp btn_eliminar::b:p::p}, space :p:33:p, comp scrollPane1:::p:228:p, space ::16:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -56,29 +56,40 @@ new FormModel {
 				name: "cmb_tipo"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "btn_guardar"
 				"text": "Agregar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "btn_eliminar"
 				"text": "Eliminar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_eliminarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button3"
+				name: "btn_modificar"
 				"text": "Modificar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_modificarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label8"
 				"text": "Contraseña"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField6"
+				name: "txt_clave"
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "table1"
+					name: "tabla"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaMouseClicked", true ) )
 				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": "Correo:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_correo"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 10 )
