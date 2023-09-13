@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import Clases.LlenasLista_usuario;
 /*
  * Created by JFormDesigner on Tue Sep 12 15:19:18 CST 2023
  */
@@ -11,9 +12,12 @@ import javax.swing.GroupLayout;
  * @author jonat
  */
 public class usuarioForm extends JDialog {
+    LlenasLista_usuario con = new LlenasLista_usuario();
     public usuarioForm(Window owner) {
         super(owner);
         initComponents();
+        this.cmb_tipo.setModel(con.obt_tipoUsuario());
+
     }
 
     private void initComponents() {

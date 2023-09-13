@@ -17,6 +17,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_genero"
 						"text": "Genero"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_genero", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_formato"
@@ -42,6 +43,8 @@ new FormModel {
 					name: "btn_Usuario"
 					"text": "Usuarios"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/editar.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_Usuario", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_UsuarioMouseClicked", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JMenuItem" ) {
 					name: "btn_miUsuario"

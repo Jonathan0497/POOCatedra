@@ -51,7 +51,6 @@ public class CategoriaForm extends JDialog {
         }
 
         Clases.Mantenimiento_Categoria obj = new Clases.Mantenimiento_Categoria();
-        obj.setCodigo(Integer.parseInt(txt_idCategoria.getText()));
         obj.setNombre(txt_categoria.getText());
 
         try {

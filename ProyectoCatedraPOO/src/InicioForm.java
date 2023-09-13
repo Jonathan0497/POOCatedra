@@ -1,3 +1,4 @@
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 /*
@@ -17,9 +18,23 @@ public class InicioForm extends JFrame {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                new InicioForm().setVisible(true);
             }
         });
+    }
+
+    private void btn_Usuario(ActionEvent e) {
+        usuarioForm c = new usuarioForm(this);
+        c.setVisible(true);
+    }
+
+    private void btn_UsuarioMouseClicked(MouseEvent e) {
+
+    }
+
+    private void btn_genero(ActionEvent e) {
+        CategoriaForm c = new CategoriaForm(this);
+        c.setVisible(true);
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -48,6 +63,7 @@ public class InicioForm extends JFrame {
 
                 //---- btn_genero ----
                 btn_genero.setText("Genero");
+                btn_genero.addActionListener(e -> btn_genero(e));
                 menu1.add(btn_genero);
 
                 //---- btn_formato ----
@@ -72,6 +88,13 @@ public class InicioForm extends JFrame {
             //---- btn_Usuario ----
             btn_Usuario.setText("Usuarios");
             btn_Usuario.setIcon(new ImageIcon(getClass().getResource("/icon/editar.png")));
+            btn_Usuario.addActionListener(e -> btn_Usuario(e));
+            btn_Usuario.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    btn_UsuarioMouseClicked(e);
+                }
+            });
             menuBar1.add(btn_Usuario);
 
             //---- btn_miUsuario ----

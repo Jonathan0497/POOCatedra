@@ -77,15 +77,37 @@ public class Mantenimiento_Categoria {
         cn = con.conectar();
     }
 
+    public int obtenerUltimoID() {
+        int ultimoID = -1;
+        try {
+            String sql = "SELECT MAX(id_genero) FROM genero";
+            PreparedStatement cmd = cn.prepareStatement(sql);
+            ResultSet rs = cmd.executeQuery();
+
+            if (rs.next()) {
+                ultimoID = rs.getInt(1);
+            }
+
+            rs.close();
+            cmd.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return ultimoID;
+    }
+
+
     public boolean guardarProyecto(){
         boolean resp = false;
         try{
+            int newID = obtenerUltimoID() + 1;
+
             String sql = "INSERT INTO genero (id_genero, genero)"
                     + "VALUES(?, ?)";
 
             PreparedStatement cmd = cn.prepareStatement(sql);
 
-            cmd.setInt(1, codigo);
+            cmd.setInt(1, newID);
             cmd.setString(2, nombre);
 
             if(!cmd.execute()){
