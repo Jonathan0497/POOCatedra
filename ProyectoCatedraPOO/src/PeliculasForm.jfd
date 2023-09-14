@@ -1,0 +1,94 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:136:p, comp btn_guardar:::p::p, space :p:66:p, comp btn_modificar:::p::p, space :p:77:p, comp btn_eliminar:::p::p}, seq l {space :p:33:p, par l {comp scrollPane1:::p:592:p, seq l {par l {comp label3::l:p::p, comp label2::l:p::p, comp label4::l:p::p, comp label5::l:p::p}, space s:::p, par l:::p {comp txt_nomPeliculas::l:::x, comp txt_idPeliculas::l:::x, comp scrollPane2::l:::x, comp txt_anioInicioPeliculas::l:p:159:p}, space s:::p, par l {comp label7::l:p::p, comp label6::l:p::p, comp label8::l:p::p}, space s:::p, par l:::p {comp cmb_formatoPeliculas::l::159:x, comp cmb_clasificacionPeliculas::l::159:x, comp cmb_generoPeliculas::l::159:x}}}}, seq l {space :p:265:p, comp label1:::p::p}}, space ::28:x}}"
+			"$verticalGroup": "par l {seq t {space :p:34:p, comp label1:::p::p, space :p:54:p, par t {seq {par b {comp label2::b:p::p, comp txt_idPeliculas::b:p::p, comp label6::b:p::p, comp cmb_generoPeliculas::b:p::p}, space s:::p, par b {comp label3::b:p::p, comp txt_nomPeliculas::b:p::p, comp label7::b:p::p, comp cmb_clasificacionPeliculas::b:p::p}, space s:::p, par t {comp label4:::p::p, comp scrollPane2:::p::p}}, par b {comp label8::b:p::p, comp cmb_formatoPeliculas::b:p::p}}, space :p:17:p, par b {comp label5::b:p::p, comp txt_anioInicioPeliculas::b:p::p}, space :p:38:p, par b {comp btn_modificar::b:p::p, comp btn_eliminar::b:p::p, comp btn_guardar::b:p::p}, space :p:36:p, comp scrollPane1:::p:195:p, space ::25:x}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tablaPeliculas"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaPeliculasMouseClicked", true ) )
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "txt_descripccionPeliculas"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Registro Peliculas"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "ID:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Nombre de la pelicula:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Descripción:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "Año de lanzamiento:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_nomPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_idPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_anioInicioPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "Género:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "Clasificación:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "Formato:"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_clasificacionPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_generoPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_formatoPeliculas"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_guardar"
+				"text": "Guardar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_modificar"
+				"text": "Modificar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_modificarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_eliminar"
+				"text": "Eliminar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_eliminarMouseClicked", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}
