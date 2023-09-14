@@ -41,6 +41,11 @@ public class InicioForm extends JFrame {
         Formato c = new Formato(this);
         c.setVisible(true);
     }
+
+    private void btn_funciones(ActionEvent e) {
+        SucursalesForm c = new SucursalesForm(this);
+        c.setVisible(true);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
@@ -82,6 +87,7 @@ public class InicioForm extends JFrame {
 
                 //---- btn_funciones ----
                 btn_funciones.setText("Funciones");
+                btn_funciones.addActionListener(e -> btn_funciones(e));
                 menu1.add(btn_funciones);
 
                 //---- btn_clasificacion ----
