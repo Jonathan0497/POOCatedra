@@ -88,16 +88,14 @@ public class Mantenimiento_Inicio {
                     "INNER JOIN peliculas p ON m.id_pelicula = p.id_pelicula\n" +
                     "INNER JOIN formato f ON m.id_formato = f.id_formato\n" +
                     "INNER JOIN salas s ON m.id_salas = s.id_salas\n" +
-                    "WHERE p.id_pelicula = ?\n" +  // Usamos ? como marcador de posición
-                    "AND s.id_sucursal = ?;";  // Usamos ? como marcador de posición
+                    "WHERE s.id_sucursales = ?\n" +  // Usamos ? como marcador de posición
+                    "AND p.id_pelicula = ?;";  // Usamos ? como marcador de posición
 
             ps = cn.prepareStatement(consulta);
 
             // Asignamos los valores de los parámetros
-            /*ps.setInt(1, getCodigo_pelicula());
-            ps.setInt(2, getCodigo_sucursal());;*/
-            ps.setInt(1, codigo_pelicula);
-            ps.setInt(2, codigo_sucursal);
+            ps.setInt(2, getCodigo_pelicula());
+            ps.setInt(1, getCodigo_sucursal());
 
             rs = ps.executeQuery();
             rsm = rs.getMetaData();

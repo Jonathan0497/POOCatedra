@@ -228,7 +228,11 @@ public class Mantenimiento_Pelicula {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT * FROM peliculas");
+            ps = cn.prepareStatement("SELECT p.id_pelicula, p.nombre_pelicula, p.descripcion, p.anio_lanzamiento, g.genero, c.clasificacion, f.formato\n" +
+                                        "FROM peliculas p\n" +
+                                        "INNER JOIN genero g ON p.id_genero = g.id_genero\n" +
+                                        "INNER JOIN clasificacion c ON p.id_clasificacion = c.id_clasificacion\n" +
+                                        "INNER JOIN formato f ON p.id_formato = f.id_formato;");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();

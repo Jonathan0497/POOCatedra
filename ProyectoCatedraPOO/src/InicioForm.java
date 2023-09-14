@@ -1,7 +1,6 @@
 import Clases.LlenarLista_inicio;
 import Clases.LlenarLista_sucursales;
 import Clases.Mantenimiento_Inicio;
-import Clases.Mantenimiento_Sucursales;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -73,21 +72,26 @@ public class InicioForm extends JFrame {
         int indicePelicula = cmb_pelicula.getSelectedIndex();
 
         if (indiceSucursal == 0 || indicePelicula == 0){
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione una película y sucursal válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una película y sucursal válida. ", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
+                System.out.println(indicePelicula);
+                System.out.println(indiceSucursal);
                 Clases.Mantenimiento_Inicio obj = new Clases.Mantenimiento_Inicio();
-                obj.setCodigo_pelicula(cmb_pelicula.getSelectedIndex());
-                obj.setCodigo_sucursal(cmb_sucursal.getSelectedIndex());
 
-                ver.llenartabla(tabla);
+                // Establece los valores para codigo_sucursal y codigo_pelicula
+                obj.setCodigo_sucursal(indiceSucursal);
+                obj.setCodigo_pelicula(indicePelicula);
+
+                // Llama al método llenartabla
+                obj.llenartabla(tabla);
             } catch (Exception ex){
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error al llenar la tabla" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al llenar la tabla: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }
+
 
     private void btn_sucursales(ActionEvent e) {
         SucursalesForm c = new SucursalesForm(this);
@@ -96,6 +100,11 @@ public class InicioForm extends JFrame {
 
     private void btn_salas(ActionEvent e) {
         SalasForm c = new SalasForm(this);
+        c.setVisible(true);
+    }
+
+    private void btn_peliculas(ActionEvent e) {
+        PeliculasForm c = new PeliculasForm(this);
         c.setVisible(true);
     }
     private void initComponents() {
@@ -164,6 +173,7 @@ public class InicioForm extends JFrame {
 
                 //---- btn_peliculas ----
                 btn_peliculas.setText("Peliculas");
+                btn_peliculas.addActionListener(e -> btn_peliculas(e));
                 menu1.add(btn_peliculas);
 
                 //---- btn_funciones ----
