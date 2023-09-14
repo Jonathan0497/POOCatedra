@@ -67,7 +67,7 @@ public class SucursalesForm extends JDialog {
         obj.setId_usuario(cmb_gerenteSucursales.getSelectedIndex());
 
         try {
-            if (obj.guardarFormato()) {
+            if (obj.guardarSucursal()) {
                 limpiartabla();
                 txt_nombreSucursales.setText("");
                 txt_telefonoSucursales.setText("");
@@ -99,7 +99,7 @@ public class SucursalesForm extends JDialog {
             obj.setDireccion(txt_direccionSucursales.getText());
             obj.setId_usuario(cmb_gerenteSucursales.getSelectedIndex());
 
-            if(obj.modificarFormato()){
+            if(obj.modificarSucursal()){
                 try {
                     limpiartabla();
                     ver.llenarTabla(tabla);
@@ -123,7 +123,7 @@ public class SucursalesForm extends JDialog {
         int eliminar = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar?", "Atención", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(eliminar == 0){
-            if(obj.eliminarFormato()){
+            if(obj.eliminarSucursal()){
                 try {
                     limpiartabla();
                     ver.llenarTabla(tabla);
