@@ -31,6 +31,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_funciones"
 						"text": "Funciones"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_funciones", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "btn_clasificacion"
