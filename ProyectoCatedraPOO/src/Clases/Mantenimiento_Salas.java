@@ -9,61 +9,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Mantenimiento_Sucursales {
-    private static final Logger LOGGER = Logger.getLogger(Mantenimiento_Sucursales.class.getName());
-    private Connection cn;
-    private Integer id_sucursales;
-    private String nombre;
-    private Integer telefono;
-    private String direccion;
-    private Integer id_usuario;
-
+public class Mantenimiento_Salas {
     public Connection getCn() {
         return cn;
     }
 
     public void setCn(Connection cn) {
         this.cn = cn;
-    }
-
-    public Integer getId_sucursales() {
-        return id_sucursales;
-    }
-
-    public void setId_sucursales(Integer id_sucursales) {
-        this.id_sucursales = id_sucursales;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Integer getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
     }
 
     public ResultSet getRs() {
@@ -98,12 +50,41 @@ public class Mantenimiento_Sucursales {
         this.dtm = dtm;
     }
 
+    public Integer getId_salas() {
+        return id_salas;
+    }
+
+    public void setId_salas(Integer id_salas) {
+        this.id_salas = id_salas;
+    }
+
+    public Integer getNumero_sala() {
+        return numero_sala;
+    }
+
+    public void setNumero_sala(Integer numero_sala) {
+        this.numero_sala = numero_sala;
+    }
+
+    public Integer getId_sucursales() {
+        return id_sucursales;
+    }
+
+    public void setId_sucursales(Integer id_sucursales) {
+        this.id_sucursales = id_sucursales;
+    }
+
+    private static final Logger LOGGER = Logger.getLogger(Mantenimiento_Salas.class.getName());
+    private Connection cn;
     private ResultSet rs;
     private PreparedStatement ps;
     private ResultSetMetaData rsm;
     private DefaultTableModel dtm;
+    private Integer id_salas;
+    private Integer numero_sala;
+    private Integer id_sucursales;
 
-    public Mantenimiento_Sucursales() {
+    public Mantenimiento_Salas() {
         Conexion con = new Conexion();
         cn = con.conectar();
     }
@@ -111,7 +92,7 @@ public class Mantenimiento_Sucursales {
     public int obtenerUltimoID() {
         int ultimoID = -1;
         try {
-            String sql = "SELECT MAX(id_sucursales) FROM sucursales";
+            String sql = "SELECT MAX(id_salas) FROM salas";
             PreparedStatement cmd = cn.prepareStatement(sql);
             ResultSet rs = cmd.executeQuery();
 
@@ -127,18 +108,16 @@ public class Mantenimiento_Sucursales {
         return ultimoID;
     }
 
-    public boolean guardarSucursal() {
+    public boolean guardarSalas() {
         boolean resp = false;
         try {
 
             int newID = obtenerUltimoID() + 1;
-            String sql = "INSERT INTO sucursales (id_sucursales, nombre, telefono, direccion, id_usuario) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO salas (id_salas, numero_sala, id_sucursales) VALUES(?,?,?)";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
-            cmd.setString(2, nombre);
-            cmd.setInt(3, telefono);
-            cmd.setString(4,direccion);
-            cmd.setInt(5,id_usuario);
+            cmd.setInt(2, numero_sala);
+            cmd.setInt(3,id_sucursales);
 
             if (!cmd.execute()) {
                 resp = true;
@@ -147,22 +126,19 @@ public class Mantenimiento_Sucursales {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al guardar la sucursal", e);
+            LOGGER.log(Level.SEVERE, "Error al guardar la sala", e);
         }
         return resp;
     }
 
-    public boolean modificarSucursal() {
+    public boolean modificarSalas() {
         boolean resp = false;
         try {
-            String sql = "UPDATE sucursales SET nombre = ?, telefono = ?, direccion = ?, id_usuario = ? WHERE id_sucursales = ?";
+            String sql = "UPDATE salas SET numero_sala = ?, id_sucursales = ? WHERE id_salas = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
-            cmd.setString(1, nombre);
-            cmd.setInt(2, telefono);
-            cmd.setString(3,direccion);
-            cmd.setInt(4,id_usuario);
-            cmd.setInt(5, id_sucursales);
-
+            cmd.setInt(1, numero_sala);
+            cmd.setInt(2, id_sucursales);
+            cmd.setInt(3,id_salas);
 
             if (!cmd.execute()) {
                 resp = true;
@@ -171,16 +147,16 @@ public class Mantenimiento_Sucursales {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al modificar la sucursal", e);
+            LOGGER.log(Level.SEVERE, "Error al modificar la sala", e);
         }
         return resp;
     }
-    public boolean eliminarSucursal() {
+    public boolean eliminarSalas() {
         boolean resp = false;
         try {
-            String sql = "DELETE FROM sucursales WHERE id_sucursales = ?";
+            String sql = "DELETE FROM salas WHERE id_salas = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
-            cmd.setInt(1, id_sucursales);
+            cmd.setInt(1, id_salas);
 
             if (!cmd.execute()) {
                 resp = true;
@@ -188,17 +164,16 @@ public class Mantenimiento_Sucursales {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al eliminar la sucursal", e);
+            LOGGER.log(Level.SEVERE, "Error al eliminar la sala", e);
         }
         return resp;
     }
-    public void llenarTabla(javax.swing.JTable tabla) throws Exception {
+
+    public void llenarTablaSalas(javax.swing.JTable tabla) throws Exception {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT s.id_sucursales, s.nombre, s.telefono, s.direccion, u.nombre\n" +
-                                        "FROM sucursales s\n" +
-                                        "INNER JOIN usuario u ON s.id_usuario = u.id_usuario;");
+            ps = cn.prepareStatement("SELECT * FROM salas");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();
