@@ -43,8 +43,7 @@ public class InicioForm extends JFrame {
     }
 
     private void btn_funciones(ActionEvent e) {
-        SucursalesForm c = new SucursalesForm(this);
-        c.setVisible(true);
+        // TODO add your code here
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
