@@ -192,6 +192,7 @@ public class SucursalesForm extends JDialog {
 
         //---- label1 ----
         label1.setText("Registro Sucursales");
+        label1.setFont(new Font("Inter", Font.PLAIN, 26));
 
         //---- label2 ----
         label2.setText("Id:");
@@ -274,9 +275,6 @@ public class SucursalesForm extends JDialog {
                                 .addComponent(txt_direccionSucursales)
                                 .addComponent(cmb_gerenteSucursales, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(257, 257, 257)
-                            .addComponent(label1))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(93, 93, 93)
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
@@ -285,15 +283,18 @@ public class SucursalesForm extends JDialog {
                             .addGap(82, 82, 82)
                             .addComponent(btn_modificar)
                             .addGap(72, 72, 72)
-                            .addComponent(btn_eliminar)))
-                    .addContainerGap(74, Short.MAX_VALUE))
+                            .addComponent(btn_eliminar))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(179, 179, 179)
+                            .addComponent(label1)))
+                    .addContainerGap(76, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(93, 93, 93)
+                    .addGap(94, 94, 94)
                     .addComponent(label1)
-                    .addGap(59, 59, 59)
+                    .addGap(58, 58, 58)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(label2)

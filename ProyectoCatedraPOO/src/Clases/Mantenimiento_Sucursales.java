@@ -196,7 +196,9 @@ public class Mantenimiento_Sucursales {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT * FROM sucursales");
+            ps = cn.prepareStatement("SELECT s.id_sucursales, s.nombre, s.telefono, s.direccion, u.nombre\n" +
+                                        "FROM sucursales s\n" +
+                                        "INNER JOIN usuario u ON s.id_usuario = u.id_usuario;");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();
