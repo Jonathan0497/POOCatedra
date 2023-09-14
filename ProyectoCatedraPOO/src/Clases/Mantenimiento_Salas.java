@@ -173,7 +173,9 @@ public class Mantenimiento_Salas {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT * FROM salas");
+            ps = cn.prepareStatement("SELECT s.id_salas, s.numero_sala, su.nombre AS nombre_sucursal\n" +
+                                    "FROM salas s\n" +
+                                    "INNER JOIN sucursales su ON s.id_sucursales = su.id_sucursales;\n");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();

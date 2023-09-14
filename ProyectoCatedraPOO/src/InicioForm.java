@@ -88,13 +88,23 @@ public class InicioForm extends JFrame {
         }
 
     }
+
+    private void btn_sucursales(ActionEvent e) {
+        SucursalesForm c = new SucursalesForm(this);
+        c.setVisible(true);
+    }
+
+    private void btn_salas(ActionEvent e) {
+        SalasForm c = new SalasForm(this);
+        c.setVisible(true);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
         menuBar1 = new JMenuBar();
         menu2 = new JMenu();
-        menuItem1 = new JMenuItem();
-        menuItem2 = new JMenuItem();
+        btn_sucursales = new JMenuItem();
+        btn_salas = new JMenuItem();
         hSpacer2 = new JPanel(null);
         menu1 = new JMenu();
         btn_genero = new JMenuItem();
@@ -124,13 +134,15 @@ public class InicioForm extends JFrame {
                 menu2.setText("Cinema");
                 menu2.setIcon(new ImageIcon(getClass().getResource("/icon/entrada-de-cine.png")));
 
-                //---- menuItem1 ----
-                menuItem1.setText("Sucursales");
-                menu2.add(menuItem1);
+                //---- btn_sucursales ----
+                btn_sucursales.setText("Sucursales");
+                btn_sucursales.addActionListener(e -> btn_sucursales(e));
+                menu2.add(btn_sucursales);
 
-                //---- menuItem2 ----
-                menuItem2.setText("Salas");
-                menu2.add(menuItem2);
+                //---- btn_salas ----
+                btn_salas.setText("Salas");
+                btn_salas.addActionListener(e -> btn_salas(e));
+                menu2.add(btn_salas);
             }
             menuBar1.add(menu2);
             menuBar1.add(hSpacer2);
@@ -257,8 +269,8 @@ public class InicioForm extends JFrame {
     // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
     private JMenuBar menuBar1;
     private JMenu menu2;
-    private JMenuItem menuItem1;
-    private JMenuItem menuItem2;
+    private JMenuItem btn_sucursales;
+    private JMenuItem btn_salas;
     private JPanel hSpacer2;
     private JMenu menu1;
     private JMenuItem btn_genero;

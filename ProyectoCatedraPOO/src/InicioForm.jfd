@@ -42,12 +42,14 @@ new FormModel {
 					"text": "Cinema"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/entrada-de-cine.png" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem1"
+						name: "btn_sucursales"
 						"text": "Sucursales"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_sucursales", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem2"
+						name: "btn_salas"
 						"text": "Salas"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_salas", true ) )
 					} )
 				} )
 				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {

@@ -29,7 +29,7 @@ public class SalasForm extends JDialog {
         initComponents();
         this.cmb_sucursal.setModel(con.obt_sucursal());
 
-        modelo.addColumn("Id");
+        modelo.addColumn("ID");
         modelo.addColumn("Número de salas");
         modelo.addColumn("Sucursal");
 
@@ -177,12 +177,13 @@ public class SalasForm extends JDialog {
 
         //---- label1 ----
         label1.setText("Registro Salas");
+        label1.setFont(new Font("Inter", Font.PLAIN, 26));
 
         //---- label2 ----
-        label2.setText("Id:");
+        label2.setText("ID:");
 
         //---- label3 ----
-        label3.setText("Numero de salas:");
+        label3.setText("Numero de sala:");
 
         //---- label4 ----
         label4.setText("Sucursal:");
@@ -232,12 +233,13 @@ public class SalasForm extends JDialog {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(231, 231, 231)
+                    .addComponent(label1)
+                    .addContainerGap(247, Short.MAX_VALUE))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(99, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(227, 227, 227)
-                            .addComponent(label1))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(98, 98, 98)
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
@@ -246,26 +248,26 @@ public class SalasForm extends JDialog {
                                         .addComponent(label2))
                                     .addGap(18, 18, 18)
                                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txt_NumSalas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                        .addComponent(txt_idSalas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                        .addComponent(cmb_sucursal, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
+                                        .addComponent(txt_NumSalas)
+                                        .addComponent(txt_idSalas)
+                                        .addComponent(cmb_sucursal, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addComponent(btn_guardar)
                                     .addGap(18, 18, 18)
                                     .addComponent(btn_modificar)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btn_eliminar))))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(83, 83, 83)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 423, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(147, Short.MAX_VALUE))
+                                    .addComponent(btn_eliminar)))
+                            .addGap(183, 183, 183))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 463, GroupLayout.PREFERRED_SIZE)
+                            .addGap(91, 91, 91))))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(78, 78, 78)
+                    .addGap(27, 27, 27)
                     .addComponent(label1)
-                    .addGap(85, 85, 85)
+                    .addGap(64, 64, 64)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(label2)
                         .addComponent(txt_idSalas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -282,9 +284,9 @@ public class SalasForm extends JDialog {
                         .addComponent(btn_guardar)
                         .addComponent(btn_modificar)
                         .addComponent(btn_eliminar))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(28, 28, 28)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(21, Short.MAX_VALUE))
+                    .addContainerGap(55, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
