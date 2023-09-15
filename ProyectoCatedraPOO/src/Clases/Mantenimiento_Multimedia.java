@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Mantenimiento_Salas {
+public class Mantenimiento_Multimedia {
     public Connection getCn() {
         return cn;
     }
@@ -50,41 +51,70 @@ public class Mantenimiento_Salas {
         this.dtm = dtm;
     }
 
-    public Integer getId_salas() {
-        return id_salas;
+    public Integer getCodigo_sala() {
+        return codigo_sala;
     }
 
-    public void setId_salas(Integer id_salas) {
-        this.id_salas = id_salas;
+    public void setCodigo_sala(Integer codigo_sala) {
+        this.codigo_sala = codigo_sala;
     }
 
-    public Integer getNumero_sala() {
-        return numero_sala;
+    public Integer getCodigo_pelicula() {
+        return codigo_pelicula;
     }
 
-    public void setNumero_sala(Integer numero_sala) {
-        this.numero_sala = numero_sala;
+    public void setCodigo_pelicula(Integer codigo_pelicula) {
+        this.codigo_pelicula = codigo_pelicula;
     }
 
-    public Integer getId_sucursales() {
-        return id_sucursales;
+    public Integer getCodigo_formato() {
+        return codigo_formato;
     }
 
-    public void setId_sucursales(Integer id_sucursales) {
-        this.id_sucursales = id_sucursales;
+    public void setCodigo_formato(Integer codigo_formato) {
+        this.codigo_formato = codigo_formato;
     }
 
-    private static final Logger LOGGER = Logger.getLogger(Mantenimiento_Salas.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Mantenimiento_Multimedia.class.getName());
     private Connection cn;
     private ResultSet rs;
     private PreparedStatement ps;
     private ResultSetMetaData rsm;
     private DefaultTableModel dtm;
-    private Integer id_salas;
-    private Integer numero_sala;
-    private Integer id_sucursales;
 
-    public Mantenimiento_Salas() {
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    private Integer codigo;
+
+    public Date getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public void setHora_inicio(Date hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public Date getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(Date hora_fin) {
+        this.hora_fin = hora_fin;
+    }
+
+    private java.util.Date hora_inicio;
+    private java.util.Date hora_fin;
+    private Integer codigo_sala;
+    private Integer codigo_pelicula;
+    private Integer codigo_formato;
+
+    public Mantenimiento_Multimedia(){
         Conexion con = new Conexion();
         cn = con.conectar();
     }
@@ -92,7 +122,7 @@ public class Mantenimiento_Salas {
     public int obtenerUltimoID() {
         int ultimoID = -1;
         try {
-            String sql = "SELECT MAX(id_salas) FROM salas";
+            String sql = "SELECT MAX(id_multimedia) FROM multimedia";
             PreparedStatement cmd = cn.prepareStatement(sql);
             ResultSet rs = cmd.executeQuery();
 
@@ -107,17 +137,20 @@ public class Mantenimiento_Salas {
         }
         return ultimoID;
     }
-
-    public boolean guardarSalas() {
+    public boolean guardarPelicula() {
         boolean resp = false;
         try {
 
             int newID = obtenerUltimoID() + 1;
-            String sql = "INSERT INTO salas (id_salas, numero_sala, id_sucursales) VALUES(?,?,?)";
+
+            String sql = "INSERT INTO multimedia (id_multimedia, horaInicio, horaFin, id_salas, id_pelicula, id_formato) VALUES(?,?,?,?,?,?)";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
-            cmd.setInt(2, numero_sala);
-            cmd.setInt(3,id_sucursales);
+            cmd.setTimestamp(2, new java.sql.Timestamp(hora_inicio.getTime()));
+            cmd.setTimestamp(3, new java.sql.Timestamp(hora_fin.getTime()));
+            cmd.setInt(4, codigo_sala);
+            cmd.setInt(5,codigo_pelicula);
+            cmd.setInt(6,codigo_formato);
 
             if (!cmd.execute()) {
                 resp = true;
@@ -126,19 +159,23 @@ public class Mantenimiento_Salas {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al guardar la sala", e);
+            LOGGER.log(Level.SEVERE, "Error al guardar la pelicula", e);
         }
         return resp;
     }
 
-    public boolean modificarSalas() {
+    public boolean modificarPelicula() {
         boolean resp = false;
         try {
-            String sql = "UPDATE salas SET numero_sala = ?, id_sucursales = ? WHERE id_salas = ?";
+            String sql = "UPDATE multimedia SET horaInicio = ?, horaFin = ?, id_salas = ?, id_pelicula = ?, id_formato = ? WHERE id_multimedia = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
-            cmd.setInt(1, numero_sala);
-            cmd.setInt(2, id_sucursales);
-            cmd.setInt(3,id_salas);
+            cmd.setTimestamp(2, new java.sql.Timestamp(hora_inicio.getTime()));
+            cmd.setTimestamp(3, new java.sql.Timestamp(hora_fin.getTime()));
+            cmd.setInt(3, codigo_sala);
+            cmd.setInt(4,codigo_pelicula);
+            cmd.setInt(5,codigo_formato);
+            cmd.setInt(6, codigo);
+
 
             if (!cmd.execute()) {
                 resp = true;
@@ -147,16 +184,17 @@ public class Mantenimiento_Salas {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al modificar la sala", e);
+            LOGGER.log(Level.SEVERE, "Error al modificar la pelicula", e);
         }
         return resp;
     }
-    public boolean eliminarSalas() {
+
+    public boolean eliminarPelicula() {
         boolean resp = false;
         try {
-            String sql = "DELETE FROM salas WHERE id_salas = ?";
+            String sql = "DELETE FROM multimedia WHERE id_multimedia = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
-            cmd.setInt(1, id_salas);
+            cmd.setInt(1, codigo);
 
             if (!cmd.execute()) {
                 resp = true;
@@ -164,18 +202,16 @@ public class Mantenimiento_Salas {
             cmd.close();
             cn.close();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al eliminar la sala", e);
+            LOGGER.log(Level.SEVERE, "Error al eliminar la pelicula", e);
         }
         return resp;
     }
 
-    public void llenarTablaSalas(javax.swing.JTable tabla) throws Exception {
+    public void llenartabla(javax.swing.JTable tabla) throws Exception {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT s.id_salas, s.numero_sala, su.nombre AS nombre_sucursal\n" +
-                                    "FROM salas s\n" +
-                                    "INNER JOIN sucursales su ON s.id_sucursales = su.id_sucursales;");
+            ps = cn.prepareStatement("SELECT * FROM multimedia");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();
@@ -191,7 +227,7 @@ public class Mantenimiento_Salas {
                 dtm.addRow(fila);
             }
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al llenar la tabla", e);
+            e.printStackTrace();
             throw new Exception("Error al llenar la tabla: " + e.getMessage());
         } finally {
             if (rs != null) {
@@ -205,4 +241,5 @@ public class Mantenimiento_Salas {
             }
         }
     }
+
 }

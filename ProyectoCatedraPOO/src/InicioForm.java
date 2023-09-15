@@ -64,7 +64,8 @@ public class InicioForm extends JFrame {
     }
 
     private void btn_funciones(ActionEvent e) {
-        // TODO add your code here
+        MultimediaForm c = new MultimediaForm(this);
+        c.setVisible(true);
     }
 
     private void btn_buscarMouseClicked(MouseEvent e) {
@@ -178,7 +179,9 @@ public class InicioForm extends JFrame {
 
                 //---- btn_funciones ----
                 btn_funciones.setText("Funciones");
-                btn_funciones.addActionListener(e -> btn_funciones(e));
+                btn_funciones.addActionListener(e -> {
+			btn_funciones(e);
+		});
                 menu1.add(btn_funciones);
 
                 //---- btn_clasificacion ----

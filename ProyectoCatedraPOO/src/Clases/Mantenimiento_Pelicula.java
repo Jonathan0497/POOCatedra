@@ -122,6 +122,16 @@ public class Mantenimiento_Pelicula {
     private Integer id_pelicula;
     private String nombre_pelicula;
     private String descripcion;
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+
+    private String duracion;
     private String anio_lanzamiento;
     private Integer id_genero;
     private Integer id_clasificacion;
@@ -158,15 +168,14 @@ public class Mantenimiento_Pelicula {
             int newID = obtenerUltimoID() + 1;
             int id_estadoPeliculas = 1;
 
-            String sql = "INSERT INTO peliculas (id_pelicula, nombre_pelicula, descripcion, anio_lanzamiento, id_genero, id_clasificacion, id_formato, id_estadoPelicula) VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO peliculas (id_pelicula, nombre_pelicula, descripcion, anio_lanzamiento, id_genero, duracion, id_estadoPelicula) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
             cmd.setString(2, nombre_pelicula);
             cmd.setString(3, descripcion);
             cmd.setString(4, anio_lanzamiento);
             cmd.setInt(5,id_genero);
-            cmd.setInt(6,id_clasificacion);
-            cmd.setInt(7,id_formato);
+            cmd.setString(6,duracion);
             cmd.setInt(8,id_estadoPeliculas);
 
             if (!cmd.execute()) {
@@ -184,14 +193,13 @@ public class Mantenimiento_Pelicula {
     public boolean modificarPelicula() {
         boolean resp = false;
         try {
-            String sql = "UPDATE peliculas SET nombre_pelicula = ?, descripcion = ?, anio_lanzamiento = ?, id_genero = ?, id_clasificacion = ?, id_formato = ? WHERE id_pelicula = ?";
+            String sql = "UPDATE peliculas SET nombre_pelicula = ?, descripcion = ?, anio_lanzamiento = ?, id_genero = ?, duracion = ? WHERE id_pelicula = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setString(1, nombre_pelicula);
             cmd.setString(2,descripcion);
             cmd.setString(3,anio_lanzamiento);
             cmd.setInt(4, id_genero);
-            cmd.setInt(5, id_clasificacion);
-            cmd.setInt(6, id_formato);
+            cmd.setString(5, duracion);
 
 
             if (!cmd.execute()) {
@@ -209,7 +217,7 @@ public class Mantenimiento_Pelicula {
     public boolean eliminarPelicula() {
         boolean resp = false;
         try {
-            String sql = "DELETE FROM peliculas WHERE id_pelicula = ?";
+            String sql = "UPDATE peliculas SET id_estadoPelicula = 2 WHERE id_pelicula = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, id_pelicula);
 
@@ -228,11 +236,9 @@ public class Mantenimiento_Pelicula {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
-            ps = cn.prepareStatement("SELECT p.id_pelicula, p.nombre_pelicula, p.descripcion, p.anio_lanzamiento, g.genero, c.clasificacion, f.formato\n" +
+            ps = cn.prepareStatement("SELECT p.id_pelicula, p.nombre_pelicula, p.descripcion, p.anio_lanzamiento, g.genero, p.duracion\n" +
                                         "FROM peliculas p\n" +
-                                        "INNER JOIN genero g ON p.id_genero = g.id_genero\n" +
-                                        "INNER JOIN clasificacion c ON p.id_clasificacion = c.id_clasificacion\n" +
-                                        "INNER JOIN formato f ON p.id_formato = f.id_formato;");
+                                        "INNER JOIN genero g ON p.id_genero = g.id_genero;");
             rs = ps.executeQuery();
             rsm = rs.getMetaData();
             ArrayList<Object[]> datos = new ArrayList<>();

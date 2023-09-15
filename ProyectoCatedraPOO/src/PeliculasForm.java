@@ -28,11 +28,9 @@ public class PeliculasForm extends JDialog {
         super(owner);
         initComponents();
         this.cmb_generoPeliculas.setModel(con.obt_generoPelicula());
-        this.cmb_clasificacionPeliculas.setModel(con.obt_clasificacionPelicula());
-        this.cmb_formatoPeliculas.setModel(con.obt_formatoPelicula());
 
         modelo.addColumn("Id");
-        modelo.addColumn("Nombre de \n la pelicula");
+        modelo.addColumn("Nombre de la pelicula");
         modelo.addColumn("Descripción");
         modelo.addColumn("Año de lanzamiento");
         modelo.addColumn("Genero");

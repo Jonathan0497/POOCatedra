@@ -1,0 +1,79 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:187:p, comp label3:::p:252:p}, seq l {space :p:55:p, comp scrollPane1:::p:535:p}, seq l {space :p:28:p, par l {seq {comp label7:::p::p, space :p:68:p, comp btn_guardar:::p::p, space :p:55:p, comp btn_modificar:::p::p}, seq {par l {comp label2:::p::p, comp label1:::p::p}, space s:::p, par l:::p {comp txt_id::::150:x, comp txt_fechaEmision::::150:x}, space :p:55:p, par l {comp label4::l:p::p, seq l {par l {comp label5:::p::p, comp label6:::p::p}, par l {seq {space :p:18:p, comp cmb_pelicula:::p:151:p}, seq l {space s:::p, par l {comp cmb_sala:::p:150:p, comp cmb_formato:::p:151:p, comp btn_eliminar::l:p::p}}}}}}}}}, space ::63:x}}"
+			"$verticalGroup": "par l {seq l {space :p:39:p, comp label3:::p::p, space :p:50:p, par b {comp txt_id::b:p::p, comp label5::b:p::p, comp cmb_pelicula::b:p::p, comp label1::b:p::p}, space :p:16:p, par b {comp label2::b:p::p, comp txt_fechaEmision::b:p::p, comp label6::b:p::p, comp cmb_formato::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp cmb_sala::b:p::p, comp label7::b:p::p}, space u:::p, par b {comp btn_guardar::b:p::p, comp btn_modificar::b:p::p, comp btn_eliminar::b:p::p}, space :p:7:p, comp scrollPane1:::p:280:p, space :p:16:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Registro  Funciones"
+				"font": new java.awt.Font( "Inter", 0, 26 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "ID"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Fecha Emision:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_id"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_sala"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Sala:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "Pelicula:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "Formato:"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_formato"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_pelicula"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "Hora:"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tabla"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_fechaEmision"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_guardar"
+				"text": "Agregar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_modificar"
+				"text": "Eliminar"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_eliminar"
+				"text": "Modificar"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}
