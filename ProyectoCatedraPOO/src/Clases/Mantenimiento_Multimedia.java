@@ -169,8 +169,8 @@ public class Mantenimiento_Multimedia {
         try {
             String sql = "UPDATE multimedia SET horaInicio = ?, horaFin = ?, id_salas = ?, id_pelicula = ?, id_formato = ? WHERE id_multimedia = ?";
             PreparedStatement cmd = cn.prepareStatement(sql);
-            cmd.setTimestamp(2, new java.sql.Timestamp(hora_inicio.getTime()));
-            cmd.setTimestamp(3, new java.sql.Timestamp(hora_fin.getTime()));
+            cmd.setTimestamp(1, new java.sql.Timestamp(hora_inicio.getTime()));
+            cmd.setTimestamp(2, new java.sql.Timestamp(hora_fin.getTime()));
             cmd.setInt(3, codigo_sala);
             cmd.setInt(4,codigo_pelicula);
             cmd.setInt(5,codigo_formato);

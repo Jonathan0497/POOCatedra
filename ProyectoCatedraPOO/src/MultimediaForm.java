@@ -128,9 +128,119 @@ public class MultimediaForm extends JDialog {
         calendarioFinal.set(Calendar.HOUR_OF_DAY, hour);
         calendarioFinal.set(Calendar.MINUTE, minute);
 
-        java.util.Date fechaFinal = calendarioFinal.getTime();
+        java.util.Date fechaInicio = calendarioFinal.getTime();
 
-        int duracion = obtenerDuracionPelicula(cmb_pelicula.getSelectedItem().toString());
+        int seleccionPelicula = cmb_pelicula.getSelectedIndex();
+
+        if (seleccionPelicula == 0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una pelicula");
+            return;
+        }
+            int duracion = obtenerDuracionPelicula(cmb_pelicula.getSelectedItem().toString());
+
+            calendarioFinal.setTime(fecha);
+            calendarioFinal.set(Calendar.HOUR_OF_DAY, hour);
+            calendarioFinal.set(Calendar.MINUTE, minute);
+            calendarioFinal.add(Calendar.MINUTE, duracion);
+            java.util.Date fechaFin = calendarioFinal.getTime();
+
+
+            Clases.Mantenimiento_Multimedia obj = new Clases.Mantenimiento_Multimedia();
+            obj.setHora_inicio(fechaInicio);
+            obj.setHora_fin(fechaFin);
+            obj.setCodigo_pelicula(cmb_pelicula.getSelectedIndex());
+            obj.setCodigo_formato(cmb_formato.getSelectedIndex());
+            obj.setCodigo_sala(cmb_sala.getSelectedIndex());
+
+            try {
+                if (obj.guardarPelicula()) {
+                    limpiartabla();
+
+                    txt_fechaEmision.setText("");
+                    cmb_sala.setSelectedIndex(0);
+                    cmb_formato.setSelectedIndex(0);
+                    cmb_pelicula.setSelectedIndex(0);
+
+                    ver.llenartabla(tabla);
+                    JOptionPane.showMessageDialog(this, "Datos guardados");
+                    this.tabla.setModel(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al guardar datos");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al guardar datos: " + ex.getMessage());
+            }
+
+    }
+
+    private void btn_eliminarMouseClicked(MouseEvent e) {
+        if (txt_id.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "Campos vacíos");
+        }
+        else {
+            Clases.Mantenimiento_Multimedia obj = new Clases.Mantenimiento_Multimedia();
+            obj.setCodigo(Integer.parseInt(txt_id.getText()));
+
+
+            if(obj.modificarPelicula()){
+                try {
+                    limpiartabla();
+                    ver.llenartabla(tabla);
+
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+                    this.tabla.setModel(modelo);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error al modificar datos: " + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al modificar datos");
+            }
+        }
+    }
+
+    private void btn_modificarMouseClicked(MouseEvent e) {
+        if (txt_id.getText().equals("") || txt_fechaEmision.getText().equals("") || cmb_sala.getSelectedItem().toString().equals("") || cmb_pelicula.getSelectedItem().toString().equals("") || cmb_formato.getSelectedItem().toString().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "Campos vacíos");
+            return;
+        }
+        String fechaTexto = txt_fechaEmision.getText();
+        java.util.Date fecha = null;
+        try {
+            fecha = formatoFecha.parse(fechaTexto);
+        } catch (ParseException e1){
+            e1.printStackTrace();
+        }
+
+        java.util.Date selectedTime = (java.util.Date) this.timeSpinner.getValue();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(selectedTime);
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        if (hour < 10 || hour > 18 || minute > 59) {
+            JOptionPane.showMessageDialog(this, "La hora debe estar entre las 10:00 y las 18:59.");
+            return;
+        }
+
+        Calendar calendarioFinal = Calendar.getInstance();
+        calendarioFinal.setTime(fecha);
+        calendarioFinal.set(Calendar.HOUR_OF_DAY, hour);
+        calendarioFinal.set(Calendar.MINUTE, minute);
+
+        java.util.Date fechaInicio = calendarioFinal.getTime();
+
+        int seleccionPelicula = cmb_pelicula.getSelectedIndex();
+
+        if (seleccionPelicula == 0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una pelicula");
+            return;
+        }
+        int duracion = obtenerDuracionPelicula(cmb_pelicula.getSelectedItem().toString()) + 30;
 
         calendarioFinal.setTime(fecha);
         calendarioFinal.set(Calendar.HOUR_OF_DAY, hour);
@@ -138,34 +248,28 @@ public class MultimediaForm extends JDialog {
         calendarioFinal.add(Calendar.MINUTE, duracion);
         java.util.Date fechaFin = calendarioFinal.getTime();
 
+            Clases.Mantenimiento_Multimedia obj = new Clases.Mantenimiento_Multimedia();
+            obj.setCodigo(Integer.parseInt(txt_id.getText()));
+            obj.setHora_inicio(fechaInicio);
+            obj.setHora_fin(fechaFin);
+            obj.setCodigo_pelicula(cmb_pelicula.getSelectedIndex());
+            obj.setCodigo_formato(cmb_formato.getSelectedIndex());
+            obj.setCodigo_sala(cmb_sala.getSelectedIndex());
 
-        Clases.Mantenimiento_Multimedia obj = new Clases.Mantenimiento_Multimedia();
-        obj.setHora_inicio(fechaFinal);
-        obj.setHora_fin(fechaFin);
-        obj.setCodigo_pelicula(cmb_pelicula.getSelectedIndex());
-        obj.setCodigo_formato(cmb_formato.getSelectedIndex());
-        obj.setCodigo_sala(cmb_sala.getSelectedIndex());
+            if(obj.modificarPelicula()){
+                try {
+                    limpiartabla();
+                    ver.llenartabla(tabla);
 
-        try {
-            if (obj.guardarPelicula()) {
-                limpiartabla();
-
-                txt_fechaEmision.setText("");
-                cmb_sala.setSelectedIndex(0);
-                cmb_formato.setSelectedIndex(0);
-                cmb_pelicula.setSelectedIndex(0);
-
-                ver.llenartabla(tabla);
-                JOptionPane.showMessageDialog(this, "Datos guardados");
-                this.tabla.setModel(modelo);
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+                    this.tabla.setModel(modelo);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error al modificar datos: " + ex.getMessage());
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar datos");
+                JOptionPane.showMessageDialog(this, "Error al modificar datos");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al guardar datos: " + ex.getMessage());
-        }
-
     }
 
     private void initComponents() {
@@ -229,10 +333,22 @@ public class MultimediaForm extends JDialog {
         });
 
         //---- btn_modificar ----
-        btn_modificar.setText("Eliminar");
+        btn_modificar.setText("Modificar");
+        btn_modificar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btn_modificarMouseClicked(e);
+            }
+        });
 
         //---- btn_eliminar ----
-        btn_eliminar.setText("Modificar");
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btn_eliminarMouseClicked(e);
+            }
+        });
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -250,12 +366,6 @@ public class MultimediaForm extends JDialog {
                             .addGap(28, 28, 28)
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(label7)
-                                    .addGap(68, 68, 68)
-                                    .addComponent(btn_guardar)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(btn_modificar))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
                                         .addComponent(label2)
                                         .addComponent(label1))
@@ -264,23 +374,32 @@ public class MultimediaForm extends JDialog {
                                         .addComponent(txt_id, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                         .addComponent(txt_fechaEmision, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                     .addGap(55, 55, 55)
+                                    .addComponent(label4))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(label4)
                                         .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addGap(317, 317, 317)
                                             .addGroup(contentPaneLayout.createParallelGroup()
                                                 .addComponent(label5)
-                                                .addComponent(label6))
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addGap(18, 18, 18)
-                                                    .addGroup(contentPaneLayout.createParallelGroup()
-                                                        .addComponent(cmb_sala, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(cmb_formato, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btn_eliminar))))))))))
-                    .addContainerGap(63, Short.MAX_VALUE))
+                                                .addComponent(label6)))
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addComponent(label7)
+                                            .addGap(68, 68, 68)
+                                            .addComponent(btn_guardar)
+                                            .addGap(54, 54, 54)
+                                            .addComponent(btn_eliminar)))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                    .addGroup(contentPaneLayout.createParallelGroup()
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cmb_sala, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmb_formato, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addGap(15, 15, 15)
+                                            .addComponent(btn_modificar)))))
+                            .addGap(12, 12, 12)))
+                    .addContainerGap(57, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
