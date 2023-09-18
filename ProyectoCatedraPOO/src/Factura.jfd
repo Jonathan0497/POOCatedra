@@ -1,0 +1,25 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:174:p, par l {comp btnAccept:::p::p, comp label1:::p::p}, space ::146:x}}"
+			"$verticalGroup": "par l {seq l {space :p:30:p, comp label1:::p::p, space ::147:x, comp btnAccept:::p::p, space :p:45:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Factura "
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnAccept"
+				"text": "Aceptar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnAcceptMouseClicked", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

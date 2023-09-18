@@ -15,7 +15,6 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
         // Aquí puedes aplicar tus condiciones y establecer los colores de fondo y texto según las mismas
         // Por ejemplo, si quieres cambiar el color de fondo de las celdas en la columna 2 (C3), puedes hacerlo así:
         if (mantenimientoBoletos.buscarAsientoPorNumero(value.toString()).getAsientoComprado() == 1) {

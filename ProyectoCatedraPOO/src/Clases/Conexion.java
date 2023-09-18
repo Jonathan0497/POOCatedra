@@ -13,7 +13,7 @@ public class Conexion {
             // Cargar y registrar el controlador JDBC
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // Especificar detalles de la conexión
-            String url = "jdbc:sqlserver://JONATHAN_PC\\SQLEXPRESS;databaseName=PrimeCinema3;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
+            String url = "jdbc:sqlserver://DESKTOP-QQQHNB3\\SQLEXPRESS;databaseName=PrimeCinema3;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
             // Establecer conexión
             con = DriverManager.getConnection(url);
         } catch (ClassNotFoundException e) {

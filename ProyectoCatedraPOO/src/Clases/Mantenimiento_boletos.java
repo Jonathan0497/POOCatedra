@@ -1,13 +1,19 @@
 package Clases;
-
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JTable;
+
 
 public class Mantenimiento_boletos {
+
+    usuario usuarioActual = new usuario();
 
     private Connection cn;
     private PreparedStatement ps;
@@ -22,6 +28,8 @@ public class Mantenimiento_boletos {
     }
 
     private Integer codigo_multimedia;
+    private Integer id_formato;
+
     private ResultSetMetaData rsm;
     private DefaultTableModel dtm;
 
@@ -30,8 +38,9 @@ public class Mantenimiento_boletos {
     private ArrayList<Asiento> butacasSeleccionadas = new ArrayList<>();
 
 
-    public Mantenimiento_boletos(Integer codigo_multimedia) {
+    public Mantenimiento_boletos(Integer codigo_multimedia,Integer id_formato) {
         this.codigo_multimedia = codigo_multimedia;
+        this.id_formato = id_formato;
 
         Conexion con = new Conexion();
         cn = con.conectar();
@@ -84,10 +93,70 @@ public class Mantenimiento_boletos {
         return false;
     }
 
-    public ArrayList<Asiento> llenartabla(javax.swing.JTable tabla) throws Exception {
+    public boolean comprarBoletos() throws Exception {
+        try {
+
+            Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
+            cn = con.conectar(); // Obtener una nueva conexión
+            Date fechaActual = new Date();
+            Timestamp fechaYHoraActual = new Timestamp(fechaActual.getTime());
+
+            for (Asiento asiento : butacasSeleccionadas) {
+                Random rand = new Random();
+
+                ps = cn.prepareStatement("INSERT INTO ticket \n" +
+                        "(id_multimedia, id_asiento, id_usuario, precio,id_ticket,fecha_emision) \n" +
+                        "VALUES \n" +
+                        "(?, ?, ?, ?, ?, ?)\n");
+                ps.setInt(1, codigo_multimedia);
+                ps.setInt(2, asiento.getId_asiento());
+                ps.setInt(3, usuarioActual.getId_usuario());
+                ps.setDouble(4,50);
+                ps.setInt(5,rand.nextInt(99999) + 1);
+                ps.setString(6,fechaYHoraActual.toString());
+
+                ps.executeUpdate();
+            }
+
+            butacasSeleccionadas = new ArrayList<>();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Comprar boletos " + e.getMessage());
+        }
+    }
+
+    public void vaciarSala() throws Exception {
         try {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
+            ps = cn.prepareStatement("DELETE FROM ticket WHERE id_multimedia = ?");
+            ps.setInt(1, codigo_multimedia);
+            ps.executeUpdate();
+
+        }  catch (Exception err) {
+            err.printStackTrace();
+            throw new Exception("Error al vaciar la tabla: " + err.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (cn != null && !cn.isClosed()) {
+                cn.close();
+            }
+        }
+    }
+
+    public ArrayList<Asiento> llenartabla(javax.swing.JTable tabla) throws Exception {
+
+        try {
+            Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
+            cn = con.conectar(); // Obtener una nueva conexión
+
             ps = cn.prepareStatement("SELECT \n" +
                     "    m.id_multimedia,\n" +
                     "    a.id_asiento,\n" +

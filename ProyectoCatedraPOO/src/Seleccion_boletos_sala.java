@@ -48,6 +48,7 @@ public class Seleccion_boletos_sala extends JDialog {
     }
 
     private void tblAsientosMouseClicked(MouseEvent e) {
+        System.out.println("executing");
         int filaSeleccionada = tblAsientos.getSelectedRow();
         int columnaSeleccionada = tblAsientos.getSelectedColumn();
 
@@ -64,7 +65,7 @@ public class Seleccion_boletos_sala extends JDialog {
                 mantenimientoBoletos.removerAsientoSeleccionado(asiento_Seleccionado);
             }
             // Actualizar lblAsiento con los valores de las butacas seleccionadas
-            lblAsiento.setText(""+mantenimientoBoletos.obtenerNumerosDeAsiento());
+            lblAsientoSeleccionado.setText(""+mantenimientoBoletos.obtenerNumerosDeAsiento());
         }
     }
 
@@ -73,10 +74,45 @@ public class Seleccion_boletos_sala extends JDialog {
         lblAsiento.setText("");
         // Notifica a la tabla que debe refrescar su vista
         tblAsientos.repaint();
+        lblAsientoSeleccionado.setText("");
     }
 
     private void btnHabilitarButacasMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        try {
+            mantenimientoBoletos.vaciarSala();
+            ProcesoExitoso procesoExitoso= new ProcesoExitoso();
+            procesoExitoso.setVisible(true);
+            dispose();
+
+        } catch (Exception err) {
+        err.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Erro al vaciar sala " + err.getMessage());
+    }
+    }
+
+    private void btnFinalizarMouseClicked(MouseEvent e) {
+        try {
+            mantenimientoBoletos.comprarBoletos();
+            Factura factura = new Factura();
+            factura.setVisible(true);
+            dispose();
+
+        } catch (Exception err) {
+            err.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al llenar la tabla: " + err.getMessage());
+    }
+    }
+
+    public Seleccion_boletos_sala( Integer codigo_multimedia) {
+        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia,1);
+
+        initComponents();
+        iniciarTabla();
+        // Asigna el renderizador personalizado, inyectando la clase 'mantenimientoBoletos'
+        tblAsientos.setDefaultRenderer(Object.class, new CustomCellRenderer(mantenimientoBoletos));
+    }
+
+    public Seleccion_boletos_sala() {
     }
 
     public static void main(String[] args) {
@@ -84,15 +120,12 @@ public class Seleccion_boletos_sala extends JDialog {
         pantallaActual.setVisible(true);
     }
 
-    public Seleccion_boletos_sala( Integer codigo_multimedia) {
-        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia);
-
-        initComponents();
-        initComponents();
-        // Asigna el renderizador personalizado, inyectando la clase 'mantenimientoBoletos'
-        tblAsientos.setDefaultRenderer(Object.class, new CustomCellRenderer(mantenimientoBoletos));
+    private void btnCacelarMouseClicked(MouseEvent e) {
+        InicioForm inicioForm = new InicioForm();
+        inicioForm.setVisible(true);
+        dispose();
     }
-    
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
@@ -105,6 +138,7 @@ public class Seleccion_boletos_sala extends JDialog {
         btnCacelar = new JButton();
         btnFinalizar = new JButton();
         lblAsiento = new JLabel();
+        lblAsientoSeleccionado = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -117,6 +151,7 @@ public class Seleccion_boletos_sala extends JDialog {
         btnHabilitarButacas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                btnHabilitarButacasMouseClicked(e);
                 btnHabilitarButacasMouseClicked(e);
             }
         });
@@ -135,14 +170,34 @@ public class Seleccion_boletos_sala extends JDialog {
 
         //======== scrollPane1 ========
         {
+
+            //---- tblAsientos ----
+            tblAsientos.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tblAsientosMouseClicked(e);
+                }
+            });
             scrollPane1.setViewportView(tblAsientos);
         }
 
         //---- btnCacelar ----
         btnCacelar.setText("Cancelar");
+        btnCacelar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnCacelarMouseClicked(e);
+            }
+        });
 
         //---- btnFinalizar ----
         btnFinalizar.setText("Finalizar");
+        btnFinalizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnFinalizarMouseClicked(e);
+            }
+        });
 
         //---- lblAsiento ----
         lblAsiento.setText("[]");
@@ -154,15 +209,17 @@ public class Seleccion_boletos_sala extends JDialog {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(270, 270, 270)
                     .addComponent(lblSeleccion_asientos)
-                    .addContainerGap(274, Short.MAX_VALUE))
+                    .addContainerGap(271, Short.MAX_VALUE))
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(label1)
                             .addGap(18, 18, 18)
+                            .addComponent(lblAsientoSeleccionado)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(lblAsiento, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnHabilitarButacas))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(0, 2, Short.MAX_VALUE)
@@ -186,7 +243,8 @@ public class Seleccion_boletos_sala extends JDialog {
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnHabilitarButacas)
                         .addComponent(label1)
-                        .addComponent(lblAsiento))
+                        .addComponent(lblAsiento)
+                        .addComponent(lblAsientoSeleccionado))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(btn_limpiarSeleccion)
                     .addGap(18, 18, 18)
@@ -213,5 +271,6 @@ public class Seleccion_boletos_sala extends JDialog {
     private JButton btnCacelar;
     private JButton btnFinalizar;
     private JLabel lblAsiento;
+    private JLabel lblAsientoSeleccionado;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
