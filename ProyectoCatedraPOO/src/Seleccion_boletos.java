@@ -3,8 +3,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import Clases.*;
-import net.miginfocom.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.miginfocom.swing.MigLayout;
 
 /*
  * Created by JFormDesigner on Sun Sep 17 17:34:51 BST 2023
@@ -166,25 +166,9 @@ public class Seleccion_boletos extends JFrame {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setEnabled(false);
-            scrollPane1.setFocusable(false);
-            scrollPane1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    scrollPane1MouseClicked(e);
-                }
-            });
-
-            //---- tblAsientos ----
-            tblAsientos.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    tblAsientosMouseClicked(e);
-                }
-            });
             scrollPane1.setViewportView(tblAsientos);
         }
-        contentPane.add(scrollPane1, "cell 0 10 5 1");
+        contentPane.add(scrollPane1, "cell 0 10 4 1");
 
         //---- btnCacelar ----
         btnCacelar.setText("Cancelar");

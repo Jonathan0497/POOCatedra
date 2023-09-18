@@ -42,15 +42,11 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
-				"enabled": false
-				"focusable": false
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "scrollPane1MouseClicked", true ) )
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tblAsientos"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tblAsientosMouseClicked", true ) )
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 10 5 1"
+				"value": "cell 0 10 4 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCacelar"
