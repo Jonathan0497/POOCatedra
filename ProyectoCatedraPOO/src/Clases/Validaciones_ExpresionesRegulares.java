@@ -13,6 +13,12 @@ public class Validaciones_ExpresionesRegulares {
         return Pattern.matches(regex, texto);
     }
 
+    public static boolean validacionSala(String numero) {
+        String regex = "^[1-9][0-9]*$";
+        return Pattern.matches(regex, numero);
+    }
+
+
     public static boolean validarContrasena(String contrasena) {
         String regex = "^[a-zA-Z0-9]+$";
         return Pattern.matches(regex, contrasena);
