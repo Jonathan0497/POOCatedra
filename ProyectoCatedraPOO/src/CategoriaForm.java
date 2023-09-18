@@ -3,6 +3,7 @@
  */
 
 import Clases.Mantenimiento_Categoria;
+import Clases.Validaciones;
 import Clases.Validaciones_ExpresionesRegulares;
 import Clases.Mantenimiento_EstadoPelicula;
 
@@ -22,10 +23,15 @@ public class CategoriaForm extends JDialog {
     Clases.Conexion cn = new Clases.Conexion();
     DefaultTableModel modelo = new DefaultTableModel();
     Mantenimiento_Categoria ver = new Mantenimiento_Categoria();
+    Validaciones v = new Validaciones();
     public CategoriaForm(Window owner) {
         super(owner);
         initComponents();
         txt_idCategoria.setEnabled(false);
+
+        v.validarSoloLetras(txt_categoria);
+        v.LongitudDeCaracteres(txt_categoria, 25);
+
         modelo.addColumn("id_categoria");
         modelo.addColumn("Categoria");
 
