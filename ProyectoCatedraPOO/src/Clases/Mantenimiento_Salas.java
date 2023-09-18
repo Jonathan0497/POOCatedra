@@ -112,6 +112,7 @@ public class Mantenimiento_Salas {
         boolean resp = false;
         try {
 
+
             int newID = obtenerUltimoID() + 1;
             String sql = "INSERT INTO salas (id_salas, numero_sala, id_sucursales) VALUES(?,?,?)";
             PreparedStatement cmd = cn.prepareStatement(sql);

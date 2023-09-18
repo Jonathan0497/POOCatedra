@@ -13,7 +13,7 @@ public class Conexion {
             // Cargar y registrar el controlador JDBC
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // Especificar detalles de la conexión
-            String url = "jdbc:sqlserver://JONATHAN_PC\\SQLEXPRESS;databaseName=PrimeCinema;integratedSecurity=true";
+            String url = "jdbc:sqlserver://JONATHAN_PC\\SQLEXPRESS;databaseName=PrimeCinema;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
             // Establecer conexión
             con = DriverManager.getConnection(url);
         } catch (ClassNotFoundException e) {
@@ -26,12 +26,12 @@ public class Conexion {
         return con;
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         Connection con = conectar();
         if (con != null) {
             System.out.println("Conexión establecida exitosamente");
         } else {
             System.out.println("Falló la conexión");
         }
-    }*/
+    }
 }

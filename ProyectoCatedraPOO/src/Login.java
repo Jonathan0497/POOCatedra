@@ -33,7 +33,7 @@ public class Login extends JFrame {
                     duiBD = rs.getString("dui");
                     ContraBD = rs.getString("clave");
 
-                    if (duiSy.equals(duiBD) || ContraSy.equals(ContraBD)){
+                    if (duiSy.equals(duiBD) && ContraSy.equals(ContraBD)){
                         InicioForm ini = new InicioForm();
                         ini.setVisible(true);
                         dispose();
