@@ -1,0 +1,63 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {par l {seq {space :p:155:p, par t {comp label1:::p::p, comp label4:::p::p, comp label2::t:p::p}, space :p:43:p}, seq t {space :::p, comp btn_guardar:::p:92:p, space s:::p}}, par l {comp txt_formato:::p:159:p, seq {comp btn_eliminar:::p:92:p, space u:::p, comp btn_modificar:::p::p}, comp txt_precio:::p:159:p, comp txt_idFormato::l:p:159:p}}, seq l {space :p:90:p, comp scrollPane1:::p:452:p}}, space ::111:x}}"
+			"$verticalGroup": "par l {seq l {space :p:86:p, par l {comp txt_idFormato:::p::p, comp label1:::p::p}, space s:::p, par b {comp txt_formato::b:p::p, comp label2::b:p::p}, space s:::p, par b {comp label4::b:p::p, comp txt_precio::b:p::p}, space :p:21:p, par b {comp btn_eliminar::b:p::p, comp btn_modificar::b:p::p, comp btn_guardar::b:p::p}, space :p:48:p, comp scrollPane1:::p:180:p, space ::103:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "ID Formato"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_idFormato"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_formato"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_precio"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_modificar"
+				"text": "Modificar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_modificarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_eliminar"
+				"text": "Eliminar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_eliminarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_guardar"
+				"text": "Guardar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Precio"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Formato"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "scrollPane1MouseClicked", true ) )
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tablaUsuario"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaUsuarioMouseClicked", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "scrollPane1MouseClicked", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaUsuarioMouseClicked", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}

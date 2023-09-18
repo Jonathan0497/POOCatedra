@@ -1,0 +1,72 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[281,fill][294,fill][fill][647,right][fill]"
+			"$rowConstraints": "[][][][][][][][][][123][][][][][]"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lblSeleccion_asientos"
+				"text": "Seleccion de asientos"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnHabilitarButacas"
+				"text": "Habilitar todas las butacas"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnHabilitarButacasMouseClicked", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 7"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Asientos seleccionados:"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 9"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lblAsiento"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 9"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_limpiarSeleccion"
+				"text": "Limpiar seleccion"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_limpiarSeleccionMouseClicked", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 9"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				"enabled": false
+				"focusable": false
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "scrollPane1MouseClicked", true ) )
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tblAsientos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tblAsientosMouseClicked", true ) )
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 10 5 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnCacelar"
+				"text": "Cancelar"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 13"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnFinalizar"
+				"text": "Finalizar"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 13"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 685, 465 )
+		} )
+	}
+}
