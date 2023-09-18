@@ -28,6 +28,8 @@ public class usuarioForm extends JDialog {
     public usuarioForm(Window owner) {
         super(owner);
         initComponents();
+        txt_id.setEnabled(false);
+
         v.validarSoloLetras(txt_apellido);
         v.validarSoloLetras(txt_nombre);
         v.validarSoloNumeros(txt_telefono);

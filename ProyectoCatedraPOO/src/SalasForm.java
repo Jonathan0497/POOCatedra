@@ -1,8 +1,6 @@
 import java.awt.event.*;
-import Clases.LlenarLista_salas;
-import Clases.LlenarLista_sucursales;
-import Clases.Mantenimiento_Salas;
-import Clases.Mantenimiento_Sucursales;
+
+import Clases.*;
 
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -24,9 +22,15 @@ public class SalasForm extends JDialog {
     DefaultTableModel modelo = new DefaultTableModel();
     Mantenimiento_Salas ver = new Mantenimiento_Salas();
     LlenarLista_salas con = new LlenarLista_salas();
+    Validaciones v = new Validaciones();
     public SalasForm(Window owner) {
         super(owner);
         initComponents();
+        txt_idSalas.setEnabled(false);
+
+        v.LongitudDeCaracteres(txt_NumSalas, 1);
+        v.validarSoloNumeros(txt_NumSalas);
+
         this.cmb_sucursal.setModel(con.obt_sucursal());
 
         modelo.addColumn("ID");
