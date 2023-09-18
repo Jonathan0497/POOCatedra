@@ -120,7 +120,7 @@ public class InicioForm extends JFrame {
             String idFuncion_String = String.valueOf(valorCelda);
             Integer id_funcion = Integer.valueOf(idFuncion_String);
 
-            Seleccion_boletos seleccionBoletos = new Seleccion_boletos(id_funcion);
+            Seleccion_boletos_sala seleccionBoletos = new Seleccion_boletos_sala(null,id_funcion);
             seleccionBoletos.setVisible(true);
             dispose();
         }

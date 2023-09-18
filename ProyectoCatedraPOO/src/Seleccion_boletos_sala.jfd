@@ -1,68 +1,52 @@
-JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[281,fill][294,fill][fill][647,right][fill]"
-			"$rowConstraints": "[][][][][][][][][][123][][][][][]"
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :p:270:p, comp lblSeleccion_asientos:::p::p, space ::274:x}, seq t {space :::p, par t {seq {comp label1:::p::p, space s:::p, comp lblAsiento:::p:0:p, space ::283:x, comp btnHabilitarButacas:::p::p}, seq {space :0:2:x, par t {comp scrollPane1:::p:644:p, comp btn_limpiarSeleccion:::p::p}}}, space :p:26:p}, seq t {space ::493:x, comp btnCacelar:::p::p, space :::p, comp btnFinalizar:::p::p, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :p:14:p, comp lblSeleccion_asientos:::p::p, space :p:50:p, par b {comp btnHabilitarButacas::b:p::p, comp label1::b:p::p, comp lblAsiento::b:p::p}, space u:::p, comp btn_limpiarSeleccion:::p::p, space s:::p, comp scrollPane1:::p:197:p, space ::56:x, par b {comp btnFinalizar::b:p::p, comp btnCacelar::b:p::p}, space :p:15:p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lblSeleccion_asientos"
 				"text": "Seleccion de asientos"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnHabilitarButacas"
 				"text": "Habilitar todas las butacas"
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnHabilitarButacasMouseClicked", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 7"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Asientos seleccionados:"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 9"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblAsiento"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 9"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_limpiarSeleccion"
 				"text": "Limpiar seleccion"
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_limpiarSeleccionMouseClicked", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 9"
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tblAsientos"
 				} )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 10 4 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCacelar"
 				"text": "Cancelar"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 13"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnFinalizar"
 				"text": "Finalizar"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 13"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lblAsiento"
+				"text": "[]"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 685, 465 )
+			"location": new java.awt.Point( 15, 15 )
+			"size": new java.awt.Dimension( 680, 500 )
 		} )
 	}
 }

@@ -1,21 +1,21 @@
+import Clases.Asiento;
+import Clases.CustomCellRenderer;
+import Clases.Mantenimiento_boletos;
+
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
-import Clases.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import net.miginfocom.swing.MigLayout;
-
 /*
- * Created by JFormDesigner on Sun Sep 17 17:34:51 BST 2023
+ * Created by JFormDesigner on Mon Sep 18 14:01:54 CST 2023
  */
-
 
 
 /**
- * @author Gaming
+ * @author jeffersonsolorzano
  */
-public class Seleccion_boletos extends JFrame {
+public class Seleccion_boletos_sala extends JDialog {
 
     Mantenimiento_boletos mantenimientoBoletos;
 
@@ -25,16 +25,7 @@ public class Seleccion_boletos extends JFrame {
             return false;
         }
     };
-
-    public Seleccion_boletos(Integer codigo_multimedia) {
-        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia);
-
-        initComponents();
-        iniciarTabla();
-        // Asigna el renderizador personalizado, inyectando la clase 'mantenimientoBoletos'
-        tblAsientos.setDefaultRenderer(Object.class, new CustomCellRenderer(mantenimientoBoletos));
-    }
-
+    
     private void iniciarTabla(){
         modeloAsientos.addColumn("C1");
         modeloAsientos.addColumn("C2");
@@ -77,8 +68,6 @@ public class Seleccion_boletos extends JFrame {
         }
     }
 
-
-
     private void btn_limpiarSeleccionMouseClicked(MouseEvent e) {
         mantenimientoBoletos.limpiarAsientoSeleccionados(); // Vacía la lista
         lblAsiento.setText("");
@@ -91,53 +80,38 @@ public class Seleccion_boletos extends JFrame {
     }
 
     public static void main(String[] args) {
-        Seleccion_boletos pantallaActual = new Seleccion_boletos(1);
+        Seleccion_boletos_sala pantallaActual = new Seleccion_boletos_sala(null,1);
         pantallaActual.setVisible(true);
     }
 
+    public Seleccion_boletos_sala(Window owner, Integer codigo_multimedia) {
+        super(owner);
+        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia);
+
+        initComponents();
+        initComponents();
+        // Asigna el renderizador personalizado, inyectando la clase 'mantenimientoBoletos'
+        tblAsientos.setDefaultRenderer(Object.class, new CustomCellRenderer(mantenimientoBoletos));
+    }
+    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
         lblSeleccion_asientos = new JLabel();
         btnHabilitarButacas = new JButton();
         label1 = new JLabel();
-        lblAsiento = new JLabel();
         btn_limpiarSeleccion = new JButton();
         scrollPane1 = new JScrollPane();
         tblAsientos = new JTable();
         btnCacelar = new JButton();
         btnFinalizar = new JButton();
+        lblAsiento = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
-        contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[281,fill]" +
-            "[294,fill]" +
-            "[fill]" +
-            "[647,right]" +
-            "[fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[123]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
 
         //---- lblSeleccion_asientos ----
         lblSeleccion_asientos.setText("Seleccion de asientos");
-        contentPane.add(lblSeleccion_asientos, "cell 1 1");
 
         //---- btnHabilitarButacas ----
         btnHabilitarButacas.setText("Habilitar todas las butacas");
@@ -147,12 +121,9 @@ public class Seleccion_boletos extends JFrame {
                 btnHabilitarButacasMouseClicked(e);
             }
         });
-        contentPane.add(btnHabilitarButacas, "cell 3 7");
 
         //---- label1 ----
         label1.setText("Asientos seleccionados:");
-        contentPane.add(label1, "cell 0 9");
-        contentPane.add(lblAsiento, "cell 3 9");
 
         //---- btn_limpiarSeleccion ----
         btn_limpiarSeleccion.setText("Limpiar seleccion");
@@ -162,21 +133,71 @@ public class Seleccion_boletos extends JFrame {
                 btn_limpiarSeleccionMouseClicked(e);
             }
         });
-        contentPane.add(btn_limpiarSeleccion, "cell 3 9");
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(tblAsientos);
         }
-        contentPane.add(scrollPane1, "cell 0 10 4 1");
 
         //---- btnCacelar ----
         btnCacelar.setText("Cancelar");
-        contentPane.add(btnCacelar, "cell 3 13");
 
         //---- btnFinalizar ----
         btnFinalizar.setText("Finalizar");
-        contentPane.add(btnFinalizar, "cell 3 13");
+
+        //---- lblAsiento ----
+        lblAsiento.setText("[]");
+
+        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
+        contentPane.setLayout(contentPaneLayout);
+        contentPaneLayout.setHorizontalGroup(
+            contentPaneLayout.createParallelGroup()
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(270, 270, 270)
+                    .addComponent(lblSeleccion_asientos)
+                    .addContainerGap(274, Short.MAX_VALUE))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(label1)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblAsiento, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                            .addComponent(btnHabilitarButacas))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(0, 2, Short.MAX_VALUE)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 644, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_limpiarSeleccion))))
+                    .addGap(26, 26, 26))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(493, Short.MAX_VALUE)
+                    .addComponent(btnCacelar)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnFinalizar)
+                    .addContainerGap())
+        );
+        contentPaneLayout.setVerticalGroup(
+            contentPaneLayout.createParallelGroup()
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(14, 14, 14)
+                    .addComponent(lblSeleccion_asientos)
+                    .addGap(50, 50, 50)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnHabilitarButacas)
+                        .addComponent(label1)
+                        .addComponent(lblAsiento))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btn_limpiarSeleccion)
+                    .addGap(18, 18, 18)
+                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnFinalizar)
+                        .addComponent(btnCacelar))
+                    .addGap(15, 15, 15))
+        );
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -187,11 +208,11 @@ public class Seleccion_boletos extends JFrame {
     private JLabel lblSeleccion_asientos;
     private JButton btnHabilitarButacas;
     private JLabel label1;
-    private JLabel lblAsiento;
     private JButton btn_limpiarSeleccion;
     private JScrollPane scrollPane1;
     private JTable tblAsientos;
     private JButton btnCacelar;
     private JButton btnFinalizar;
+    private JLabel lblAsiento;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
