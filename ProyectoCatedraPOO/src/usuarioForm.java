@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Clases.LlenasLista_usuario;
 import Clases.Mantenimiento_Usuario;
+import Clases.Validaciones;
 /*
  * Created by JFormDesigner on Tue Sep 12 15:19:18 CST 2023
  */
@@ -23,9 +24,20 @@ public class usuarioForm extends JDialog {
     Clases.Conexion cn = new Clases.Conexion();
     DefaultTableModel modelo =new DefaultTableModel();
     Mantenimiento_Usuario ver = new Mantenimiento_Usuario();
+    Validaciones v = new Validaciones();
     public usuarioForm(Window owner) {
         super(owner);
         initComponents();
+        v.validarSoloLetras(txt_apellido);
+        v.validarSoloLetras(txt_nombre);
+        v.validarSoloNumeros(txt_telefono);
+        v.validarSoloNumeros(txt_dui);
+        v.LongitudDeCaracteres(txt_apellido, 50);
+        v.LongitudDeCaracteres(txt_clave, 16);
+        v.LongitudDeCaracteres(txt_nombre, 50);
+        v.LongitudDeCaracteres(txt_correo, 90);
+        v.LongitudDeCaracteres(txt_dui, 9);
+        v.LongitudDeCaracteres(txt_telefono, 8);
 
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
