@@ -5,6 +5,7 @@
 import java.awt.event.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -24,25 +25,37 @@ public class Login extends JFrame {
             String ContraBD, ContraSy, duiBD, duiSy;
             ContraSy = txt_contra.getText();
             duiSy = txt_dui.getText();
+
+            // Validación de entrada básica (puedes expandir esto con más reglas)
+            if (!duiSy.matches("\\d+") || !ContraSy.matches("\\w+")) {
+                JOptionPane.showMessageDialog(this, "Entrada inválida");
+                return;
+            }
+
             try {
-                String sql = "SELECT dui, clave FROM usuario WHERE dui =" + duiSy;
+                String sql = "SELECT dui, clave FROM usuario WHERE dui = ?";
                 PreparedStatement ps = cn.conectar().prepareStatement(sql);
+                ps.setString(1, duiSy);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
                     duiBD = rs.getString("dui");
                     ContraBD = rs.getString("clave");
 
-                    if (duiSy.equals(duiBD) && ContraSy.equals(ContraBD)){
+                    if (ContraSy.equals(ContraBD)){
                         InicioForm ini = new InicioForm();
                         ini.setVisible(true);
                         dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "DUI no encontrado");
                 }
 
-            }catch (Exception ex){
+            }catch (SQLException ex){
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error al iniciar sesion" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error al iniciar sesión: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
