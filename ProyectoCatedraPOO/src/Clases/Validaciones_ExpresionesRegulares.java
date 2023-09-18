@@ -28,4 +28,9 @@ public class Validaciones_ExpresionesRegulares {
         String regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
         return Pattern.matches(regex, correo);
     }
+
+    public static boolean validarFecha(String fecha) {
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19[0-9]{2}|20[0-9]{2})$";
+        return Pattern.matches(regex, fecha);
+    }
 }

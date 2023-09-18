@@ -1,8 +1,6 @@
 import java.awt.event.*;
-import Clases.LlenarLista_pelicula;
-import Clases.LlenarLista_sucursales;
-import Clases.Mantenimiento_Pelicula;
-import Clases.Mantenimiento_Sucursales;
+
+import Clases.*;
 
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -27,6 +25,7 @@ public class PeliculasForm extends JDialog {
     public PeliculasForm(Window owner) {
         super(owner);
         initComponents();
+        txt_idPeliculas.setEnabled(false);
         this.cmb_generoPeliculas.setModel(con.obt_generoPelicula());
 
         modelo.addColumn("Id");
@@ -34,8 +33,7 @@ public class PeliculasForm extends JDialog {
         modelo.addColumn("Descripción");
         modelo.addColumn("Año de lanzamiento");
         modelo.addColumn("Genero");
-        modelo.addColumn("Clasificación");
-        modelo.addColumn("Formato");
+        modelo.addColumn("Duración");
 
         this.tablaPeliculas.setModel(modelo);
 
@@ -55,8 +53,17 @@ public class PeliculasForm extends JDialog {
     }
 
     private void btn_guardarMouseClicked(MouseEvent e) {
-        if (txt_nomPeliculas.getText().isEmpty() || txt_descripccionPeliculas.getText().isEmpty() || txt_anioInicioPeliculas.getText().equals("") || cmb_generoPeliculas.getSelectedItem().toString().equals("") || cmb_clasificacionPeliculas.getSelectedItem().toString().equals("") || cmb_formatoPeliculas.getSelectedItem().toString().equals("")) {
+        if (txt_nomPeliculas.getText().isEmpty() || txt_descripccionPeliculas.getText().isEmpty() || txt_anioInicioPeliculas.getText().equals("") || cmb_generoPeliculas.getSelectedItem().toString().equals("") || txt_duracion.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campos vacíos");
+            return;
+        }
+
+        if (!Validaciones_ExpresionesRegulares.validarTexto(txt_nomPeliculas.getText()) ||
+                !Validaciones_ExpresionesRegulares.validarTexto(txt_descripccionPeliculas.getText()) ||
+                !Validaciones_ExpresionesRegulares.validarFecha(txt_anioInicioPeliculas.getText()) ||
+                !Validaciones_ExpresionesRegulares.validarFecha(txt_duracion.getText()))
+        {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa un texto válido.");
             return;
         }
 
@@ -65,8 +72,7 @@ public class PeliculasForm extends JDialog {
         obj.setDescripcion(txt_descripccionPeliculas.getText());
         obj.setAnio_lanzamiento(txt_anioInicioPeliculas.getText());
         obj.setId_genero(cmb_generoPeliculas.getSelectedIndex());
-        obj.setId_clasificacion(cmb_clasificacionPeliculas.getSelectedIndex());
-        obj.setId_formato(cmb_formatoPeliculas.getSelectedIndex());
+        obj.setDuracion(txt_duracion.getText());
 
         try {
             if (obj.guardarPelicula()) {
@@ -75,8 +81,7 @@ public class PeliculasForm extends JDialog {
                 txt_descripccionPeliculas.setText("");
                 txt_anioInicioPeliculas.setText("");
                 cmb_generoPeliculas.setSelectedIndex(0);
-                cmb_clasificacionPeliculas.setSelectedIndex(0);
-                cmb_formatoPeliculas.setSelectedIndex(0);
+                txt_duracion.setText("");
                 txt_idPeliculas.setText("");
                 ver.llenarTabla(tablaPeliculas);
                 JOptionPane.showMessageDialog(this, "Datos guardados");
@@ -91,7 +96,7 @@ public class PeliculasForm extends JDialog {
     }
 
     private void btn_modificarMouseClicked(MouseEvent e) {
-        if (txt_idPeliculas.getText().equals("") || txt_nomPeliculas.getText().equals("") || txt_descripccionPeliculas.getText().equals("") || txt_anioInicioPeliculas.getText().equals("") || cmb_generoPeliculas.getSelectedItem().toString().equals("") || cmb_clasificacionPeliculas.getSelectedItem().toString().equals("") || cmb_formatoPeliculas.getSelectedItem().toString().equals("")){
+        if (txt_idPeliculas.getText().equals("") || txt_nomPeliculas.getText().equals("") || txt_descripccionPeliculas.getText().equals("") || txt_anioInicioPeliculas.getText().equals("") || cmb_generoPeliculas.getSelectedItem().toString().equals("") || txt_duracion.getText().equals("")){
 
             JOptionPane.showMessageDialog(this, "Campos vacíos");
         }
@@ -102,8 +107,7 @@ public class PeliculasForm extends JDialog {
             obj.setDescripcion(txt_descripccionPeliculas.getText());
             obj.setDescripcion(txt_anioInicioPeliculas.getText());
             obj.setId_genero(cmb_generoPeliculas.getSelectedIndex());
-            obj.setId_clasificacion(cmb_clasificacionPeliculas.getSelectedIndex());
-            obj.setId_formato(cmb_formatoPeliculas.getSelectedIndex());
+            obj.setDuracion(txt_duracion.getText());
 
             if(obj.modificarPelicula()){
                 try {
@@ -164,11 +168,8 @@ public class PeliculasForm extends JDialog {
                 txt_anioInicioPeliculas.setText(add4);
                 int add5 = Integer.parseInt(rs.getString("id_genero"));
                 cmb_generoPeliculas.setSelectedIndex(add5);
-                int add6 = Integer.parseInt(rs.getString("id_clasificacion"));
-                cmb_clasificacionPeliculas.setSelectedIndex(add6);
-                int add7 = Integer.parseInt(rs.getString("id_formato"));
-                cmb_formatoPeliculas.setSelectedIndex(add7);
-
+                String add6 = rs.getString("duracion");
+                txt_duracion.setText(add6);
 
             }
         } catch (Exception ex) {
@@ -192,14 +193,12 @@ public class PeliculasForm extends JDialog {
         txt_idPeliculas = new JTextField();
         txt_anioInicioPeliculas = new JTextField();
         label6 = new JLabel();
-        label7 = new JLabel();
-        label8 = new JLabel();
-        cmb_clasificacionPeliculas = new JComboBox();
         cmb_generoPeliculas = new JComboBox();
-        cmb_formatoPeliculas = new JComboBox();
         btn_guardar = new JButton();
         btn_modificar = new JButton();
         btn_eliminar = new JButton();
+        label7 = new JLabel();
+        txt_duracion = new JTextField();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -240,12 +239,6 @@ public class PeliculasForm extends JDialog {
         //---- label6 ----
         label6.setText("G\u00e9nero:");
 
-        //---- label7 ----
-        label7.setText("Clasificaci\u00f3n:");
-
-        //---- label8 ----
-        label8.setText("Formato:");
-
         //---- btn_guardar ----
         btn_guardar.setText("Guardar");
         btn_guardar.addMouseListener(new MouseAdapter() {
@@ -272,6 +265,9 @@ public class PeliculasForm extends JDialog {
                 btn_eliminarMouseClicked(e);
             }
         });
+
+        //---- label7 ----
+        label7.setText("Duraci\u00f3n:");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -304,14 +300,12 @@ public class PeliculasForm extends JDialog {
                                         .addComponent(txt_anioInicioPeliculas, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
                                     .addGap(18, 18, 18)
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(label7)
                                         .addComponent(label6)
-                                        .addComponent(label8))
+                                        .addComponent(label7))
                                     .addGap(18, 18, 18)
                                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cmb_formatoPeliculas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                        .addComponent(cmb_clasificacionPeliculas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                        .addComponent(cmb_generoPeliculas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
+                                        .addComponent(cmb_generoPeliculas, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                        .addComponent(txt_duracion, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(265, 265, 265)
                             .addComponent(label1)))
@@ -323,26 +317,21 @@ public class PeliculasForm extends JDialog {
                     .addGap(34, 34, 34)
                     .addComponent(label1)
                     .addGap(54, 54, 54)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(label2)
+                        .addComponent(txt_idPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label6)
+                        .addComponent(cmb_generoPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(label3)
+                        .addComponent(txt_nomPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label7)
+                        .addComponent(txt_duracion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label2)
-                                .addComponent(txt_idPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label6)
-                                .addComponent(cmb_generoPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label3)
-                                .addComponent(txt_nomPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label7)
-                                .addComponent(cmb_clasificacionPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(label4)
-                                .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(label8)
-                            .addComponent(cmb_formatoPeliculas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(label4)
+                        .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(17, 17, 17)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(label5)
@@ -354,7 +343,7 @@ public class PeliculasForm extends JDialog {
                         .addComponent(btn_guardar))
                     .addGap(36, 36, 36)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(25, Short.MAX_VALUE))
+                    .addContainerGap(26, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -376,13 +365,11 @@ public class PeliculasForm extends JDialog {
     private JTextField txt_idPeliculas;
     private JTextField txt_anioInicioPeliculas;
     private JLabel label6;
-    private JLabel label7;
-    private JLabel label8;
-    private JComboBox cmb_clasificacionPeliculas;
     private JComboBox cmb_generoPeliculas;
-    private JComboBox cmb_formatoPeliculas;
     private JButton btn_guardar;
     private JButton btn_modificar;
     private JButton btn_eliminar;
+    private JLabel label7;
+    private JTextField txt_duracion;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
