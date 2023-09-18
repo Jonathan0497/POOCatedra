@@ -80,12 +80,11 @@ public class Seleccion_boletos_sala extends JDialog {
     }
 
     public static void main(String[] args) {
-        Seleccion_boletos_sala pantallaActual = new Seleccion_boletos_sala(null,1);
+        Seleccion_boletos_sala pantallaActual = new Seleccion_boletos_sala(1);
         pantallaActual.setVisible(true);
     }
 
-    public Seleccion_boletos_sala(Window owner, Integer codigo_multimedia) {
-        super(owner);
+    public Seleccion_boletos_sala( Integer codigo_multimedia) {
         this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia);
 
         initComponents();
