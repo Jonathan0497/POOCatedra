@@ -113,11 +113,34 @@ public class Mantenimiento_Salas {
         try {
 
             int newID = obtenerUltimoID() + 1;
-            String sql = "INSERT INTO salas (id_salas, numero_sala, id_sucursales) VALUES(?,?,?)";
+            String sql = "INSERT INTO salas (id_salas, numero_sala, id_sucursales) VALUES(?,?,?)" +
+                    "DECLARE @fila CHAR(1), @columna INT, @asiento_num INT, @max_asiento INT;\n" +
+                    "\n" +
+                    "-- Obtén el número máximo de asientos ya presentes en la sala 3\n" +
+                    "SELECT @max_asiento = ISNULL(MAX(id_asiento), 0) FROM asientos WHERE id_salas = 3;\n" +
+                    "\n" +
+                    "SET @asiento_num = @max_asiento + 1;\n" +
+                    "SET @fila = CHAR(65 + (@max_asiento / 5)); -- 65 es el código ASCII para 'A'\n" +
+                    "\n" +
+                    "WHILE @asiento_num <= (@max_asiento + 40)\n" +
+                    "BEGIN\n" +
+                    "    SET @columna = (@asiento_num - 1) % 5 + 1;\n" +
+                    "\n" +
+                    "    IF @asiento_num % 5 = 1 AND @asiento_num != (@max_asiento + 1)\n" +
+                    "    BEGIN\n" +
+                    "        SET @fila = CHAR(ASCII(@fila) + 1);\n" +
+                    "    END\n" +
+                    "\n" +
+                    "    INSERT INTO asientos (numero_asiento, id_salas)\n" +
+                    "    VALUES (@fila + CAST(@columna AS VARCHAR), ?);\n" +
+                    "\n" +
+                    "    SET @asiento_num = @asiento_num + 1;\n" +
+                    "END;\n";
             PreparedStatement cmd = cn.prepareStatement(sql);
             cmd.setInt(1, newID);
             cmd.setInt(2, numero_sala);
             cmd.setInt(3,id_sucursales);
+            cmd.setInt(4,newID);
 
             if (!cmd.execute()) {
                 resp = true;

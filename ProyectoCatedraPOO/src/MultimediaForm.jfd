@@ -23,6 +23,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "txt_id"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "cmb_sala"

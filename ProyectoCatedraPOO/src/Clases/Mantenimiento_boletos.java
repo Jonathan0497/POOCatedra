@@ -28,7 +28,7 @@ public class Mantenimiento_boletos {
     }
 
     private Integer codigo_multimedia;
-    private Integer id_formato;
+    private Double precio_seleccionado;
 
     private ResultSetMetaData rsm;
     private DefaultTableModel dtm;
@@ -38,9 +38,9 @@ public class Mantenimiento_boletos {
     private ArrayList<Asiento> butacasSeleccionadas = new ArrayList<>();
 
 
-    public Mantenimiento_boletos(Integer codigo_multimedia,Integer id_formato) {
+    public Mantenimiento_boletos(Integer codigo_multimedia,Double precio_seleccionado) {
         this.codigo_multimedia = codigo_multimedia;
-        this.id_formato = id_formato;
+        this.precio_seleccionado = precio_seleccionado;
 
         Conexion con = new Conexion();
         cn = con.conectar();
@@ -58,6 +58,7 @@ public class Mantenimiento_boletos {
         butacasSeleccionadas.remove(asiento);
     }
 
+
     public  ArrayList<Asiento> devolverAsientosSeleccionados(){
         return butacasSeleccionadas;
     }
@@ -71,6 +72,13 @@ public class Mantenimiento_boletos {
         }
 
         return numerosDeAsiento;
+    }
+
+    public Double obtenerTotal(){
+        return butacasSeleccionadas.size() * precio_seleccionado;
+    }
+    public Double obtenerVuelto(Double totalIngresado){
+        return totalIngresado - (butacasSeleccionadas.size() * precio_seleccionado);
     }
 
     public Asiento buscarAsientoPorNumero( String numeroAsientoBuscado) {
@@ -111,14 +119,13 @@ public class Mantenimiento_boletos {
                 ps.setInt(1, codigo_multimedia);
                 ps.setInt(2, asiento.getId_asiento());
                 ps.setInt(3, usuarioActual.getId_usuario());
-                ps.setDouble(4,50);
+                ps.setDouble(4,precio_seleccionado);
                 ps.setInt(5,rand.nextInt(99999) + 1);
                 ps.setString(6,fechaYHoraActual.toString());
 
                 ps.executeUpdate();
             }
 
-            butacasSeleccionadas = new ArrayList<>();
             return true;
 
         } catch (Exception e) {

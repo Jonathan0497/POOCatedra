@@ -93,7 +93,10 @@ public class Seleccion_boletos_sala extends JDialog {
     private void btnFinalizarMouseClicked(MouseEvent e) {
         try {
             mantenimientoBoletos.comprarBoletos();
-            Factura factura = new Factura();
+            Factura factura = new Factura(
+                    mantenimientoBoletos.obtenerNumerosDeAsiento(),
+                    mantenimientoBoletos.obtenerTotal(),
+                    mantenimientoBoletos.obtenerVuelto(Double.parseDouble(txt_pago.getText()) ));
             factura.setVisible(true);
             dispose();
 
@@ -103,20 +106,42 @@ public class Seleccion_boletos_sala extends JDialog {
     }
     }
 
-    public Seleccion_boletos_sala( Integer codigo_multimedia) {
-        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia,1);
+    public Seleccion_boletos_sala( Integer codigo_multimedia, String formato_pelicula, String edad) {
 
+        this.mantenimientoBoletos = new Mantenimiento_boletos(codigo_multimedia,validarPrecioPelicula(formato_pelicula,edad));
         initComponents();
         iniciarTabla();
         // Asigna el renderizador personalizado, inyectando la clase 'mantenimientoBoletos'
         tblAsientos.setDefaultRenderer(Object.class, new CustomCellRenderer(mantenimientoBoletos));
     }
 
+    public Double validarPrecioPelicula (String formato_pelicula, String edad){
+        switch(formato_pelicula){
+            case "2D":
+                switch (edad){
+                    case "3RA":
+                        return 3.90;
+                    case "ADULTO":
+                        return 5.0;
+                }
+                break;
+            case "3D":
+                switch (edad){
+                    case "3RA":
+                        return 5.60;
+                    case "ADULTO":
+                        return  6.55;
+                }
+                break;
+        }
+        return 0.0;
+    }
+
     public Seleccion_boletos_sala() {
     }
 
     public static void main(String[] args) {
-        Seleccion_boletos_sala pantallaActual = new Seleccion_boletos_sala(1);
+        Seleccion_boletos_sala pantallaActual = new Seleccion_boletos_sala(1,"3D","3RA");
         pantallaActual.setVisible(true);
     }
 
@@ -139,6 +164,8 @@ public class Seleccion_boletos_sala extends JDialog {
         btnFinalizar = new JButton();
         lblAsiento = new JLabel();
         lblAsientoSeleccionado = new JLabel();
+        txt_pago = new JTextField();
+        label2 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -202,6 +229,9 @@ public class Seleccion_boletos_sala extends JDialog {
         //---- lblAsiento ----
         lblAsiento.setText("[]");
 
+        //---- label2 ----
+        label2.setText("Billete con el que pagara:");
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -209,7 +239,7 @@ public class Seleccion_boletos_sala extends JDialog {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(270, 270, 270)
                     .addComponent(lblSeleccion_asientos)
-                    .addContainerGap(271, Short.MAX_VALUE))
+                    .addContainerGap(273, Short.MAX_VALUE))
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -223,12 +253,16 @@ public class Seleccion_boletos_sala extends JDialog {
                             .addComponent(btnHabilitarButacas))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(0, 2, Short.MAX_VALUE)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 644, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_limpiarSeleccion))))
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 644, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(label2)
+                            .addGap(18, 18, 18)
+                            .addComponent(txt_pago, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                            .addComponent(btn_limpiarSeleccion)))
                     .addGap(26, 26, 26))
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap(493, Short.MAX_VALUE)
+                    .addContainerGap(492, Short.MAX_VALUE)
                     .addComponent(btnCacelar)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnFinalizar)
@@ -246,10 +280,13 @@ public class Seleccion_boletos_sala extends JDialog {
                         .addComponent(lblAsiento)
                         .addComponent(lblAsientoSeleccionado))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(btn_limpiarSeleccion)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_limpiarSeleccion)
+                        .addComponent(label2)
+                        .addComponent(txt_pago, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnFinalizar)
                         .addComponent(btnCacelar))
@@ -272,5 +309,7 @@ public class Seleccion_boletos_sala extends JDialog {
     private JButton btnFinalizar;
     private JLabel lblAsiento;
     private JLabel lblAsientoSeleccionado;
+    private JTextField txt_pago;
+    private JLabel label2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

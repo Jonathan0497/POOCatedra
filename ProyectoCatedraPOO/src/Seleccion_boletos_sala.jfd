@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:270:p, comp lblSeleccion_asientos:::p::p, space ::271:x}, seq t {space :::p, par t {seq {comp label1:::p::p, space :p:18:p, comp lblAsientoSeleccionado:::p::p, space :::p, comp lblAsiento:::p:0:p, space :::x, comp btnHabilitarButacas:::p::p}, seq {space :0:2:x, par t {comp scrollPane1:::p:644:p, comp btn_limpiarSeleccion:::p::p}}}, space :p:26:p}, seq t {space ::493:x, comp btnCacelar:::p::p, space :::p, comp btnFinalizar:::p::p, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :p:14:p, comp lblSeleccion_asientos:::p::p, space :p:50:p, par b {comp btnHabilitarButacas::b:p::p, comp label1::b:p::p, comp lblAsiento::b:p::p, comp lblAsientoSeleccionado::b:p::p}, space u:::p, comp btn_limpiarSeleccion:::p::p, space s:::p, comp scrollPane1:::p:197:p, space ::56:x, par b {comp btnFinalizar::b:p::p, comp btnCacelar::b:p::p}, space :p:15:p}}"
+			"$horizontalGroup": "par l {seq {space :p:270:p, comp lblSeleccion_asientos:::p::p, space ::273:x}, seq t {space :::p, par t {seq {comp label1:::p::p, space :p:18:p, comp lblAsientoSeleccionado:::p::p, space :::p, comp lblAsiento:::p:0:p, space :::x, comp btnHabilitarButacas:::p::p}, seq {space :0:2:x, comp scrollPane1:::p:644:p}, seq t {comp label2:::p::p, space s:::p, comp txt_pago:::p:72:p, space ::260:x, comp btn_limpiarSeleccion:::p::p}}, space :p:26:p}, seq t {space ::492:x, comp btnCacelar:::p::p, space :::p, comp btnFinalizar:::p::p, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :p:14:p, comp lblSeleccion_asientos:::p::p, space :p:50:p, par b {comp btnHabilitarButacas::b:p::p, comp label1::b:p::p, comp lblAsiento::b:p::p, comp lblAsientoSeleccionado::b:p::p}, space u:::p, par b {comp btn_limpiarSeleccion::b:p::p, comp label2::b:p::p, comp txt_pago::b:p::p}, space s:::p, comp scrollPane1:::p:197:p, space ::55:x, par b {comp btnFinalizar::b:p::p, comp btnCacelar::b:p::p}, space :p:15:p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -50,6 +50,13 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lblAsientoSeleccionado"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_pago"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Billete con el que pagara:"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 15, 15 )

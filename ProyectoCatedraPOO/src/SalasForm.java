@@ -188,6 +188,9 @@ public class SalasForm extends JDialog {
         //---- label4 ----
         label4.setText("Sucursal:");
 
+        //---- txt_idSalas ----
+        txt_idSalas.setEnabled(false);
+
         //---- btn_guardar ----
         btn_guardar.setText("Guardar");
         btn_guardar.addMouseListener(new MouseAdapter() {
