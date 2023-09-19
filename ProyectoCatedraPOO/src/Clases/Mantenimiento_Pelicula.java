@@ -145,7 +145,7 @@ public class Mantenimiento_Pelicula {
     public int obtenerUltimoID() {
         int ultimoID = -1;
         try {
-            String sql = "SELECT MAX(id_sucursales) FROM sucursales";
+            String sql = "SELECT MAX(id_pelicula) FROM peliculas";
             PreparedStatement cmd = cn.prepareStatement(sql);
             ResultSet rs = cmd.executeQuery();
 
