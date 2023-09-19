@@ -306,6 +306,9 @@ public class MultimediaForm extends JDialog {
         //---- label2 ----
         label2.setText("Fecha Emision:");
 
+        //---- txt_id ----
+        txt_id.setEnabled(false);
+
         //---- label4 ----
         label4.setText("Sala:");
 

@@ -1,0 +1,57 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:68:p, comp scrollPane1:::p:502:p}, seq l {space :p:214:p, comp label3:::p::p}, seq l {space :p:153:p, par l {comp label2:::p::p, comp label1:::p::p}, space :p:54:p, par t:::p {comp txt_idRango::l:::x, comp txt_rango::l:p:178:p}}, seq l {space :p:139:p, comp btn_guardar:::p::p, space :p:42:p, comp btn_eliminar:::p::p, space :p:42:p, comp btn_modificar:::p::p}}, space ::83:x}}"
+			"$verticalGroup": "par l {seq l {space :p:25:p, comp label3:::p::p, space ::81:x, par b {comp label1::b:p::p, comp txt_idRango::b:p::p}, space :p:48:p, par b {comp label2::b:p::p, comp txt_rango::b:p::p}, space s:::p, par b {comp btn_guardar::b:p::p, comp btn_eliminar::b:p::p, comp btn_modificar::b:p::p}, space :p:30:p, comp scrollPane1:::p:244:p, space :p:25:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Rango Usuario"
+				"font": new java.awt.Font( "Inter", 0, 26 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "ID Rango"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Rango"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_idRango"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txt_rango"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tabla"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaMouseClicked", true ) )
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_guardar"
+				"text": "Agregar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_guardarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_eliminar"
+				"text": "Eliminar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_eliminarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_modificar"
+				"text": "Modificar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_modificarMouseClicked", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}

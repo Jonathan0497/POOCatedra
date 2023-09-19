@@ -2,14 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
 
 import Clases.LlenasLista_usuario;
 import Clases.Mantenimiento_Usuario;
-import Clases.Validaciones;
 /*
  * Created by JFormDesigner on Tue Sep 12 15:19:18 CST 2023
  */
@@ -24,22 +22,9 @@ public class usuarioForm extends JDialog {
     Clases.Conexion cn = new Clases.Conexion();
     DefaultTableModel modelo =new DefaultTableModel();
     Mantenimiento_Usuario ver = new Mantenimiento_Usuario();
-    Validaciones v = new Validaciones();
     public usuarioForm(Window owner) {
         super(owner);
         initComponents();
-        txt_id.setEnabled(false);
-
-        v.validarSoloLetras(txt_apellido);
-        v.validarSoloLetras(txt_nombre);
-        v.validarSoloNumeros(txt_telefono);
-        v.validarSoloNumeros(txt_dui);
-        v.LongitudDeCaracteres(txt_apellido, 50);
-        v.LongitudDeCaracteres(txt_clave, 16);
-        v.LongitudDeCaracteres(txt_nombre, 50);
-        v.LongitudDeCaracteres(txt_correo, 90);
-        v.LongitudDeCaracteres(txt_dui, 9);
-        v.LongitudDeCaracteres(txt_telefono, 8);
 
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
@@ -69,39 +54,12 @@ public class usuarioForm extends JDialog {
         }
     }
 
-    public static boolean validarNumero(String numero, int numeroCaracteres) {
-        String regex = "^\\d{"+numeroCaracteres+"}$";
-        return Pattern.matches(regex, numero);
-    }
-
-    public static boolean validarTexto(String texto) {
-        String regex = "^[a-zA-Z\\s]{1,50}$";
-        return Pattern.matches(regex, texto);
-    }
-
-    public static boolean validarContrasena(String contrasena) {
-        String regex = "^[a-zA-Z0-9]+$";
-        return Pattern.matches(regex, contrasena);
-    }
-
-    public static boolean validarCorreo(String correo) {
-        String regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
-        return Pattern.matches(regex, correo);
-    }
-
     private void btn_guardarMouseClicked(MouseEvent e) {
         if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_clave.getText().isEmpty()
-                || txt_dui.getText().isEmpty() || txt_telefono.getText().isEmpty() || cmb_tipo.getSelectedIndex() == 0) {
+        || txt_dui.getText().isEmpty() || txt_telefono.getText().isEmpty() || cmb_tipo.getSelectedItem().toString().equals("")) {
             JOptionPane.showMessageDialog(this, "Campos vacíos");
             return;
         }
-
-        if (!validarNumero(txt_telefono.getText(), 8) || !validarNumero(txt_dui.getText(), 9) || !validarTexto(txt_nombre.getText()) || !validarTexto(txt_apellido.getText())
-        || !validarContrasena(txt_clave.getText()) || !validarCorreo(txt_correo.getText())){
-            JOptionPane.showMessageDialog(this, "El formato ingresado en algun dato es incorrecto");
-            return;
-        }
-
 
         Clases.Mantenimiento_Usuario obj = new Clases.Mantenimiento_Usuario();
         obj.setNombre(txt_nombre.getText());

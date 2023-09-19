@@ -30,6 +30,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "txt_idSalas"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "txt_NumSalas"

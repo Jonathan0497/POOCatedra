@@ -1,6 +1,9 @@
 import java.awt.event.*;
 
-import Clases.*;
+import Clases.LlenarLista_sucursales;
+import Clases.LlenasLista_usuario;
+import Clases.Mantenimiento_Formato;
+import Clases.Mantenimiento_Sucursales;
 
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -22,17 +25,9 @@ public class SucursalesForm extends JDialog {
     DefaultTableModel modelo = new DefaultTableModel();
     Mantenimiento_Sucursales ver = new Mantenimiento_Sucursales();
     LlenarLista_sucursales con = new LlenarLista_sucursales();
-    Validaciones v = new Validaciones();
     public SucursalesForm(Window owner) {
         super(owner);
         initComponents();
-        txt_idSucursales.setEnabled(false);
-        v.validarSoloNumeros(txt_telefonoSucursales);
-
-        v.LongitudDeCaracteres(txt_telefonoSucursales, 8);
-        v.LongitudDeCaracteres(txt_direccionSucursales, 90);
-        v.LongitudDeCaracteres(txt_nombreSucursales, 40);
-
         this.cmb_gerenteSucursales.setModel(con.obt_tipoGerente());
 
         modelo.addColumn("Id");

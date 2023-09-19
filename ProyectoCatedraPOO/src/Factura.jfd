@@ -1,0 +1,46 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:278:p, comp label1:::p::p}, seq l {space :p:198:p, comp btnAccept:::p::p}, seq l {space :p:22:p, par l:::p {seq {comp label3:::p::p, space :::x, comp lbl_total:::p::p}, seq {comp label2:::p::p, space :p:194:p, comp lbl_asientos:::p::p}, seq l {comp label4:::p::p, space :::x, comp lbl_vuelto:::p::p, space :p:27:p}}}}, space ::105:x}}"
+			"$verticalGroup": "par l {seq l {space :p:23:p, comp label1:::p::p, space :p:87:p, par b {comp label2::b:p::p, comp lbl_asientos::b:p::p}, space :p:55:p, par b {comp label3::b:p::p, comp lbl_total::b:p::p}, space :p:36:p, par b {comp label4::b:p::p, comp lbl_vuelto::b:p::p}, space ::63:x, comp btnAccept:::p::p, space :p:97:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Factura "
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnAccept"
+				"text": "Aceptar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnAcceptMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Sus asientos seleccionados son:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Su total es:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lbl_asientos"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lbl_total"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Vuelto:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lbl_vuelto"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 525, 490 )
+		} )
+	}
+}

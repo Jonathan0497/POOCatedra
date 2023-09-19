@@ -61,8 +61,7 @@ public class LlenarLista_multimedia {
 
         DefaultComboBoxModel jComboBox1 = new DefaultComboBoxModel();
         jComboBox1.addElement("Seleccione una sala");
-        ResultSet rs= this.consulta("SELECT CAST(s.numero_sala AS VARCHAR) + ';' + su.nombre AS sala_info FROM salas s INNER JOIN sucursales su ON s.id_sucursales = su.id_sucursales;");
-
+        ResultSet rs= this.consulta("SELECT CAST(s.id_salas AS VARCHAR) + ';' + su.nombre AS sala_info FROM salas s INNER JOIN sucursales su ON s.id_sucursales = su.id_sucursales;");
 
         try{
             while(rs.next()){

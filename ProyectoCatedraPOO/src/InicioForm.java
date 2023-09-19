@@ -27,7 +27,10 @@ public class InicioForm extends JFrame {
 
         this.cmb_pelicula.setModel(con.obt_pelicula());
         this.cmb_sucursal.setModel(con.obt_sucursal());
+        cmb_edad.addItem("ADULTO");
+        cmb_edad.addItem("3RA");
 
+        modelo.addColumn("ID Multimedia");
         modelo.addColumn("HoraInicio");
         modelo.addColumn("Formato");
         modelo.addColumn("N° sala");
@@ -108,6 +111,24 @@ public class InicioForm extends JFrame {
         PeliculasForm c = new PeliculasForm(this);
         c.setVisible(true);
     }
+
+    private void tablaMouseClicked(MouseEvent e) {
+        int filaSeleccionada = tabla.getSelectedRow();
+        int columnaSeleccionada = tabla.getSelectedColumn();
+
+        if (filaSeleccionada != -1 && columnaSeleccionada != -1) {
+            // Obtener el valor de la celda seleccionada como objeto Asiento
+            Object valorCelda = tabla.getModel().getValueAt(filaSeleccionada, 0); // 0 representa la primera columna
+            Object formatoPelicula = tabla.getModel().getValueAt(filaSeleccionada, 2);
+            String idFuncion_String = String.valueOf(valorCelda);
+            Integer id_funcion = Integer.valueOf(idFuncion_String);
+
+            Seleccion_boletos_sala seleccionBoletos = new Seleccion_boletos_sala(id_funcion,formatoPelicula.toString(),cmb_edad.getSelectedItem().toString());
+            seleccionBoletos.setVisible(true);
+            dispose();
+        }
+
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Jonathan Mendoza
@@ -132,6 +153,8 @@ public class InicioForm extends JFrame {
         btn_buscar = new JButton();
         scrollPane1 = new JScrollPane();
         tabla = new JTable();
+        label3 = new JLabel();
+        cmb_edad = new JComboBox();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -181,6 +204,7 @@ public class InicioForm extends JFrame {
                 btn_funciones.setText("Funciones");
                 btn_funciones.addActionListener(e -> {
 			btn_funciones(e);
+			btn_funciones(e);
 		});
                 menu1.add(btn_funciones);
 
@@ -229,47 +253,65 @@ public class InicioForm extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- tabla ----
+            tabla.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tablaMouseClicked(e);
+                }
+            });
             scrollPane1.setViewportView(tabla);
         }
+
+        //---- label3 ----
+        label3.setText("Edad:");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(94, 94, 94)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(22, 22, 22)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addComponent(label1)
-                        .addComponent(cmb_sucursal, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(label2)
-                        .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
-                    .addGap(160, 160, 160))
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 609, GroupLayout.PREFERRED_SIZE)
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 609, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(246, 246, 246)
-                            .addComponent(btn_buscar, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(cmb_sucursal, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addComponent(btn_buscar, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)))
+                            .addGap(72, 72, 72)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(label2)
+                                .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
+                            .addGap(60, 60, 60)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(label3)
+                                .addComponent(cmb_edad, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))))
                     .addContainerGap(22, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(38, 38, 38)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(label1)
-                        .addComponent(label2))
-                    .addGap(18, 18, 18)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmb_sucursal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addComponent(btn_buscar)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(label1)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmb_sucursal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(label2)
+                                .addComponent(label3))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmb_pelicula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmb_edad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(btn_buscar)
+                    .addGap(18, 18, 18)
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
                     .addGap(25, 25, 25))
         );
@@ -301,5 +343,7 @@ public class InicioForm extends JFrame {
     private JButton btn_buscar;
     private JScrollPane scrollPane1;
     private JTable tabla;
+    private JLabel label3;
+    private JComboBox cmb_edad;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

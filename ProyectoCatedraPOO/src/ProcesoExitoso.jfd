@@ -1,0 +1,25 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:137:p, comp label1:::p::p}, seq l {space :p:148:p, comp btnAceptar:::p::p}}, space ::160:x}}"
+			"$verticalGroup": "par l {seq l {space :p:123:p, comp label1:::p::p, space ::65:x, comp btnAceptar:::p::p, space :p:34:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Proceso exitoso"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnAceptar"
+				"text": "aceptar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnAceptarMouseClicked", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

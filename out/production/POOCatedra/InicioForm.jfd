@@ -1,0 +1,110 @@
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :p:94:p, par l {comp label1::l:p::p, comp cmb_sucursal::l:p:152:p}, space ::95:x, par l {comp label2:::p::p, comp cmb_pelicula:::p:152:p}, space :p:160:p}, seq {par l {seq {space :p:22:p, comp scrollPane1:::p:609:p}, seq l {space :p:246:p, comp btn_buscar:::p:92:p}}, space ::22:x}}"
+			"$verticalGroup": "par l {seq l {space :p:38:p, par b {comp label1::b:p::p, comp label2::b:p::p}, space s:::p, par b {comp cmb_sucursal::b:p::p, comp cmb_pelicula::b:p::p}, space s:::p, comp btn_buscar:::p::p, space ::44:x, comp scrollPane1:::p:349:p, space :p:25:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Sucursal"
+				"font": new java.awt.Font( "Inter", 0, 16 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Pelicula"
+				"font": new java.awt.Font( "Inter", 0, 16 )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_sucursal"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cmb_pelicula"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_buscar"
+				"text": "Buscar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_buscarMouseClicked", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tabla"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaMouseClicked", true ) )
+				} )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu2"
+					"text": "Cinema"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/entrada-de-cine.png" )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_sucursales"
+						"text": "Sucursales"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_sucursales", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_salas"
+						"text": "Salas"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_salas", true ) )
+					} )
+				} )
+				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+					name: "hSpacer2"
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "Cinematografía"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/camara-de-video.png" )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_genero"
+						"text": "Genero"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_genero", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_formato"
+						"text": "Formato"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_formato", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_peliculas"
+						"text": "Peliculas"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_peliculas", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_funciones"
+						"text": "Funciones"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_funciones", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_funciones", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "btn_clasificacion"
+						"text": "Clasificación"
+					} )
+				} )
+				add( new FormComponent( "com.jformdesigner.designer.wrapper.HSpacer" ) {
+					name: "hSpacer1"
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_Usuario"
+					"text": "Usuarios"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/editar.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_Usuario", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btn_UsuarioMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "btn_miUsuario"
+					"text": "Mi Usuario"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/usuario_1.png" )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 655, 625 )
+		} )
+	}
+}

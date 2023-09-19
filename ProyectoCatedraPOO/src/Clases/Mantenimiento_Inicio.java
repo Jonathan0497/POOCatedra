@@ -83,7 +83,7 @@ public class Mantenimiento_Inicio {
             Conexion con = new Conexion(); // Crear un nuevo objeto Conexion
             cn = con.conectar(); // Obtener una nueva conexión
 
-            String consulta = "SELECT m.horaInicio, f.formato, s.numero_sala, p.descripcion AS sinopsis\n" +
+            String consulta = "SELECT m.id_multimedia, m.horaInicio, f.formato, s.numero_sala, p.descripcion AS sinopsis\n" +
                     "FROM multimedia m\n" +
                     "INNER JOIN peliculas p ON m.id_pelicula = p.id_pelicula\n" +
                     "INNER JOIN formato f ON m.id_formato = f.id_formato\n" +

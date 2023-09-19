@@ -3,8 +3,6 @@
  */
 
 import Clases.Mantenimiento_Categoria;
-import Clases.Validaciones;
-import Clases.Validaciones_ExpresionesRegulares;
 import Clases.Mantenimiento_EstadoPelicula;
 
 import java.awt.*;
@@ -15,6 +13,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.DefaultTableModel;
 
+
+
 /**
  * @author jonat
  */
@@ -23,15 +23,9 @@ public class CategoriaForm extends JDialog {
     Clases.Conexion cn = new Clases.Conexion();
     DefaultTableModel modelo = new DefaultTableModel();
     Mantenimiento_Categoria ver = new Mantenimiento_Categoria();
-    Validaciones v = new Validaciones();
     public CategoriaForm(Window owner) {
         super(owner);
         initComponents();
-        txt_idCategoria.setEnabled(false);
-
-        v.validarSoloLetras(txt_categoria);
-        v.LongitudDeCaracteres(txt_categoria, 25);
-
         modelo.addColumn("id_categoria");
         modelo.addColumn("Categoria");
 
@@ -58,14 +52,8 @@ public class CategoriaForm extends JDialog {
             return;
         }
 
-        if (!Validaciones_ExpresionesRegulares.validarTexto(txt_categoria.getText())) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa un texto válido.");
-            return;
-        }
-
         Clases.Mantenimiento_Categoria obj = new Clases.Mantenimiento_Categoria();
         obj.setNombre(txt_categoria.getText());
-
 
         try {
             if (obj.guardarProyecto()) {
@@ -106,33 +94,31 @@ public class CategoriaForm extends JDialog {
     }
 
     private void btn_modificarMouseClicked(MouseEvent e) {
-        if (txt_idCategoria.getText().equals("") || txt_categoria.getText().equals("")) {
+        if (txt_idCategoria.getText().equals("") ||
+                txt_categoria.getText().equals("")){
+
             JOptionPane.showMessageDialog(this, "Campos vacíos");
-            return;
         }
+        else{
+            Clases.Mantenimiento_Categoria obj = new Clases.Mantenimiento_Categoria();
+            obj.setCodigo(Integer.parseInt(txt_idCategoria.getText()));
+            obj.setNombre(txt_categoria.getText());
 
-        if (!Validaciones_ExpresionesRegulares.validarTexto(txt_categoria.getText())) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa un texto válido.");
-            return;
-        }
+            if(obj.modificarProyecto()){
+                try {
+                    limpiartabla();
+                    ver.llenartabla(tabla);
 
-        Clases.Mantenimiento_Categoria obj = new Clases.Mantenimiento_Categoria();
-        obj.setCodigo(Integer.parseInt(txt_idCategoria.getText()));
-        obj.setNombre(txt_categoria.getText());
-
-        if(obj.modificarProyecto()){
-            try {
-                limpiartabla();
-                ver.llenartabla(tabla);
-
-                JOptionPane.showMessageDialog(this, "Datos modificados");
-                this.tabla.setModel(modelo);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error al modificar datos: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+                    this.tabla.setModel(modelo);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error al modificar datos: " + ex.getMessage());
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al modificar datos");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Error al modificar datos");
+
         }
     }
 
